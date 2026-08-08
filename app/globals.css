@@ -198,6 +198,40 @@ select:focus-visible,
     @apply -translate-y-0.5 border-red-400/70 shadow-[0_18px_48px_rgba(248,113,113,0.28)] bg-red-500;
   }
 
+  .etherneum-logo {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .etherneum-text {
+    position: relative;
+    color: transparent;
+    background-image: linear-gradient(90deg, #7dd3fc, #f472b6, #facc15, #60a5fa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 0 0 18px rgba(125, 211, 252, 0.35);
+  }
+
+  .etherneum-logo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0.35em;
+    box-shadow: inset 0 0 1px rgba(255,255,255,0.15), 0 0 48px rgba(59,130,246,0.18);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.96);
+  }
+
+  .group:hover .etherneum-logo::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .etherneum-logo:hover .etherneum-text {
+    transform: scale(1.06) translateY(-1px);
+  }
+
   .guide-button-secondary {
     @apply inline-flex items-center justify-center rounded-full border border-white/10 bg-ink-surface/90 px-6 py-3 text-base font-semibold text-text shadow-[0_0_0_1px_rgba(255,255,255,0.08)_inset,0_8px_20px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out;
   }

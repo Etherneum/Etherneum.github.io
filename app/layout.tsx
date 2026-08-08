@@ -27,9 +27,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Roll Anime to Fight — Unofficial Guide",
+  title: "Etherneum — Roll Anime to Fight Guide",
   description:
-    "Tier lists, unit cards, traits, mutations, and upgrade guides for the Roblox game Roll Anime to Fight.",
+    "Etherneum is a high-tech guide for Roll Anime to Fight with tier lists, unit cards, traits, mutations, and upgrade strategies.",
   icons: {
     icon: "/favicon.png",
   },

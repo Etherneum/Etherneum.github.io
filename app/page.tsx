@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { UNITS } from "@/data/units";
 import CardTile from "@/components/CardTile";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -75,7 +75,6 @@ const QUICK_LINKS = {
 const HERO_COPY = {
   en: {
     badge: "Meta update live",
-    title: ["ROLL ANIME", "TO FIGHT"],
     subtitle: "Tier lists, unit cards, and everything else you need in one place.",
     featureTitle: "Quick paths",
     featureDescription: "Get the best units, trade smarter, and follow the meta with clear, fast guides.",
@@ -98,7 +97,6 @@ const HERO_COPY = {
   },
   es: {
     badge: "Nuevas guías disponibles",
-    title: ["ROLL ANIME", "TO FIGHT"],
     subtitle: "Listas de nivel, cartas y todo lo que necesitas en un solo lugar.",
     featureTitle: "Rutas rápidas",
     featureDescription: "Consigue las mejores unidades, comercia con inteligencia y sigue el meta con guías claras y rápidas.",
@@ -121,28 +119,76 @@ const HERO_COPY = {
   },
 };
 
+const SITE_TITLE = "Etherneum";
+const GLITCH_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+function getRandomGlitchChar() {
+  return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+}
+
 export default function HomePage() {
   const { language } = useLanguage();
   const copy = useMemo(() => HERO_COPY[language], [language]);
   const spotlight = useMemo(() => withCardImages(resolveSpotlightUnits()), []);
+  const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
+  const [glitchChars, setGlitchChars] = useState<string[]>(Array(SITE_TITLE.length).fill(""));
+
+  useEffect(() => {
+    if (hoveredLetter === null) {
+      setGlitchChars(Array(SITE_TITLE.length).fill(""));
+      return;
+    }
+
+    const glitchIndices = [hoveredLetter - 1, hoveredLetter, hoveredLetter + 1].filter(
+      (index) => index >= 0 && index < SITE_TITLE.length
+    );
+
+    const interval = window.setInterval(() => {
+      setGlitchChars((current) =>
+        current.map((ch, index) => (glitchIndices.includes(index) ? getRandomGlitchChar() : ""))
+      );
+    }, 140);
+
+    return () => window.clearInterval(interval);
+  }, [hoveredLetter]);
 
   return (
     <div className="flex flex-col gap-16">
-      <section className="relative isolate flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-ink-surface/70 via-ink-surface/40 to-transparent p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)] sm:min-h-[calc(100vh-5rem)] sm:p-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,113,113,0.25),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.16),transparent_35%)]" />
-        <div className="absolute left-1/2 top-6 h-32 w-32 -translate-x-1/2 rounded-full bg-red-500/15 blur-3xl" />
-        <div className="absolute bottom-8 right-8 h-24 w-24 rounded-full bg-cyan-400/10 blur-3xl" />
-        <div className="relative z-10 flex max-w-2xl flex-col gap-6">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-red-400/20 bg-red-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-red-200">
-            <span className="h-2 w-2 rounded-full bg-red-400" />
+      <section className="relative isolate flex min-h-screen w-[100vw] left-[50%] translate-x-[-50%] flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(235,77,102,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.14),transparent_26%),linear-gradient(180deg,#07080e 0%,#101826 100%)] pb-8 shadow-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,113,113,0.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_35%)]" />
+        <div className="absolute inset-y-28 left-6 h-28 w-28 rounded-full border border-red-400/20 blur-3xl" />
+        <div className="absolute right-8 top-20 h-24 w-24 rounded-full border border-fuchsia-400/15 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgba(255,255,255,0.05)_55%)]" />
+        <div className="relative z-10 flex w-full flex-col items-center justify-center gap-6 text-center">
+          <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200">
+            <span className="h-2 w-2 rounded-full bg-cyan-400" />
             {copy.badge}
           </div>
-          <h1 className="font-display text-5xl font-black leading-[0.95] tracking-[0.08em] text-white sm:text-7xl">
-            {copy.title[0]}
-            <br />
-            <span className="bg-gradient-to-r from-red-500 via-orange-400 to-red-700 bg-clip-text text-transparent">{copy.title[1]}</span>
-          </h1>
-          <p className="max-w-md font-body text-sm text-white/80 sm:text-base">
+          <div className="group flex flex-col items-center gap-4">
+            <h1 className="font-display text-[5.5rem] font-black uppercase leading-[0.88] tracking-[-0.06em] text-rose-100 drop-shadow-[0_0_30px_rgba(244,63,94,0.45)] sm:text-[8.5rem]">
+              {SITE_TITLE.split("").map((letter, index) => {
+                const isNearby = hoveredLetter !== null && Math.abs(index - hoveredLetter) <= 1;
+                return (
+                  <span
+                    key={`${letter}-${index}`}
+                    onMouseEnter={() => setHoveredLetter(index)}
+                    onMouseLeave={() => setHoveredLetter(null)}
+                    className="inline-block px-1"
+                  >
+                    <span
+                      className={`transition-all duration-200 ${isNearby ? "text-rose-200" : "text-rose-100"}`}
+                    >
+                      {isNearby && glitchChars[index] ? glitchChars[index] : letter}
+                    </span>
+                  </span>
+                );
+              })}
+            </h1>
+            <p className="text-sm uppercase tracking-[0.45em] text-rose-200/95 sm:text-base">
+              Roll Anime to Fight guide
+            </p>
+          </div>
+          <p className="max-w-2xl px-4 font-body text-sm text-white/70 sm:text-base">
             {copy.subtitle}
           </p>
           <div className="flex flex-wrap gap-3 pt-1">
