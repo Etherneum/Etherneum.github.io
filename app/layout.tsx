@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { Anton, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import DiscordButton from "@/components/DiscordButton";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { LanguageProvider } from "@/components/LanguageProvider";
+
+const GA_MEASUREMENT_ID = "G-F7F0JKHSF4";
 
 const display = Anton({
   subsets: ["latin"],
@@ -62,8 +63,21 @@ export default function RootLayout({
             </div>
           </footer>
           <DiscordButton />
-          <Analytics />
         </LanguageProvider>
+
+        {GA_MEASUREMENT_ID ? (
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+        ) : null}
+        {GA_MEASUREMENT_ID ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}', { page_path: window.location.pathname });`
+            }}
+          />
+        ) : null}
       </body>
     </html>
   );
