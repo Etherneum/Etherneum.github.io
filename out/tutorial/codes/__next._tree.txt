@@ -9,4 +9,4 @@
 :HL["/cards/Megumo.png","image"]
 :HL["/cards/items/Super_Time_Potion.png","image"]
 :HL["/cards/items/Trading_Ticket.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"tutorial","param":null,"prefetchHints":4192,"slots":{"children":{"name":"codes","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"fIBRivqugZFaN4eQO5F95"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"tutorial","param":null,"prefetchHints":4192,"slots":{"children":{"name":"codes","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"0xBLIhSGgQFpgeAruj1qS"}
