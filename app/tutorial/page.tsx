@@ -7,7 +7,14 @@ const GUIDE_COPY = {
   en: {
     title: "Guide",
     subtitle: "Explore the main guide topics with a smoother, more polished experience.",
+    categoryTitle: "Explore by experience",
     overview: "Guide overview",
+    categories: [
+      { title: "Beginner", href: "/tutorial/beginner", description: "Core progression and simple starting advice.", symbol: "🌱" },
+      { title: "Intermediate", href: "/tutorial/intermediate", description: "Traits, cloning, and stronger mid-game routines.", symbol: "⚙️" },
+      { title: "Endgame", href: "/tutorial/endgame", description: "Late-game systems, event efficiency, and progression depth.", symbol: "🏁" },
+      { title: "Other", href: "/tutorial/other", description: "Extra guides and support content.", symbol: "🧭" },
+    ],
     items: [
       { title: "Team Building", href: "/tutorial/teambuilding", description: "How to build a META optimal team.", symbol: "⚔️" },
       { title: "Traits benefits", href: "/tutorial/traits", description: "Trait tiers, buffs, and drop rates.", symbol: "✦" },
@@ -32,7 +39,14 @@ const GUIDE_COPY = {
   es: {
     title: "Guía",
     subtitle: "Explora los temas principales de la guía con una experiencia más fluida y pulida.",
+    categoryTitle: "Explora por experiencia",
     overview: "Resumen de la guía",
+    categories: [
+      { title: "Principiante", href: "/tutorial/beginner", description: "Progresión básica y consejos iniciales.", symbol: "🌱" },
+      { title: "Intermedio", href: "/tutorial/intermediate", description: "Traits, clonación y rutinas más fuertes de mitad de juego.", symbol: "⚙️" },
+      { title: "Endgame", href: "/tutorial/endgame", description: "Sistemas de fin de juego, eficiencia de eventos y profundidad de progresión.", symbol: "🏁" },
+      { title: "Otros", href: "/tutorial/other", description: "Guías adicionales y contenido de soporte.", symbol: "🧭" },
+    ],
     items: [
       { title: "Construcción de equipo", href: "/tutorial/teambuilding", description: "Cómo construir un equipo META óptimo.", symbol: "⚔️" },
       { title: "Beneficios de traits", href: "/tutorial/traits", description: "Niveles de traits, buffs y probabilidades de drop.", symbol: "✦" },
@@ -77,6 +91,36 @@ export default function TutorialPage() {
           {copy.subtitle}
         </p>
       </div>
+
+      <section>
+        <SectionHeading title={copy.categoryTitle} />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {copy.categories.map((category) => (
+            <Link
+              key={category.href}
+              href={category.href}
+              className="group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[1.8rem] border border-red-500/10 bg-gradient-to-br from-ink-surface via-ink-surface/95 to-red-500/10 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_16px_42px_rgba(0,0,0,0.28)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-red-400/20"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_40%)]" />
+              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full border border-white/10 bg-white/5 blur-2xl" />
+              <div className="absolute -bottom-10 -left-10 h-28 w-28 rounded-full border border-white/10 bg-black/10 blur-3xl" />
+              <div className="relative z-10">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
+                  {category.symbol}
+                </div>
+                <h3 className="font-display text-2xl font-black tracking-[0.05em] text-text">
+                  {category.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-text-dim">{category.description}</p>
+              </div>
+              <div className="relative z-10 mt-6 flex items-center justify-between gap-3">
+                <span className="text-sm font-semibold tracking-[0.04em] text-red-300/95">Open section →</span>
+                <span className="text-xs uppercase tracking-[0.3em] text-text-faint">Guide</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section>
         <SectionHeading title={copy.overview} />
