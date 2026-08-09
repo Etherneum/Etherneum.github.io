@@ -17,13 +17,13 @@ const GUIDE_COPY = {
       { title: "Clone machine", href: "/tutorial/clone-machine", description: "Clone machine timings by mutation, trait, rarity, and level 1 baseline data.", symbol: "🧪" },
       { title: "Evolution Machine", href: "/tutorial/evolution-machine", description: "How to evolve god units with Infinite Tower and crafting materials.", symbol: "🔧" },
       { title: "Gamepass priority", href: "/tutorial/gamepasses", description: "The recommended order for gamepasses.", symbol: "🛡️" },
-      { title: "Limited Time Events", href: "/tutorial/limited-time-events", description: "The first battle pass and other time-limited seasonal events.", symbol: "🎉" },
-      { title: "Order vs Chaos", href: "/tutorial/order-vs-chaos", description: "A dedicated limited-time event page with shop items, quests, and success tips.", symbol: "⚖️" },
+      { title: "Order vs Chaos", href: "/tutorial/order-vs-chaos", description: "A dedicated limited-time event page with shop items, quests, and success tips.", symbol: "⚖️", tag: "NEW" },
       { title: "Free-to-play tokens", href: "/tutorial/free-to-play-tokens", description: "How to earn tokens and spend them efficiently without Robux.", symbol: "🪙" },
       { title: "Titles", href: "/tutorial/titles", description: "Achievement titles and approximate time estimates.", symbol: "🏷️" },
-      { title: "Codes", href: "/tutorial/codes", description: "Active redeem codes and their rewards.", symbol: "🎟️" },
+      { title: "Codes", href: "/tutorial/limited-time-events/codes", description: "Active redeem codes and their rewards.", symbol: "🎟️" },
       { title: "Infinite Tower", href: "/tutorial/infinite-tower", description: "Rewards and strategies for endless wave combat.", symbol: "🏰" },
       { title: "Admin Abuse", href: "/tutorial/admin-abuse", description: "Weekly update event with free items, Astronaut mutation, obby, and boss rewards.", symbol: "⚠️" },
+      { title: "Limited Time Events", href: "/tutorial/limited-time-events", description: "Event hub for battle passes and limited-time content.", symbol: "🎉" },
     ],
     badge: (index: number) => `Guide ${index + 1}`,
     action: "Open section →",
@@ -40,13 +40,13 @@ const GUIDE_COPY = {
       { title: "Fusión y clonación", href: "/tutorial/merging", description: "Cómo funcionan la fusión y la clonación en la práctica.", symbol: "🧬" },
       { title: "Máquina de clonación", href: "/tutorial/clone-machine", description: "Tiempos de la máquina de clonación por mutación, trait, rareza y datos base de nivel 1.", symbol: "🧪" },
       { title: "Prioridad de gamepasses", href: "/tutorial/gamepasses", description: "El orden recomendado para los gamepasses.", symbol: "🛡️" },
-      { title: "Eventos de tiempo limitado", href: "/tutorial/limited-time-events", description: "El primer battle pass y otros eventos estacionales de tiempo limitado.", symbol: "🎉" },
-      { title: "Order vs Chaos", href: "/tutorial/order-vs-chaos", description: "Una página dedicada del evento limitado con objetos de tienda, misiones y consejos para tener éxito.", symbol: "⚖️" },
+      { title: "Order vs Chaos", href: "/tutorial/order-vs-chaos", description: "Una página dedicada del evento limitado con objetos de tienda, misiones y consejos para tener éxito.", symbol: "⚖️", tag: "NUEVO" },
       { title: "Tokens para free-to-play", href: "/tutorial/free-to-play-tokens", description: "Cómo ganar tokens y gastarlos eficientemente sin Robux.", symbol: "🪙" },
       { title: "Títulos", href: "/tutorial/titles", description: "Títulos de logro y estimaciones aproximadas de tiempo.", symbol: "🏷️" },
-      { title: "Códigos", href: "/tutorial/codes", description: "Códigos activos de canje y sus recompensas.", symbol: "🎟️" },
+      { title: "Códigos", href: "/tutorial/limited-time-events/codes", description: "Códigos activos de canje y sus recompensas.", symbol: "🎟️" },
       { title: "Torre Infinita", href: "/tutorial/infinite-tower", description: "Recompensas y estrategias para combate de olas infinitas.", symbol: "🏰" },
       { title: "Abuso de administrador", href: "/tutorial/admin-abuse", description: "Evento de actualización semanal con artículos gratis, mutación astronauta, obby y recompensas de boss.", symbol: "⚠️" },
+      { title: "Eventos de tiempo limitado", href: "/tutorial/limited-time-events", description: "Centro de eventos de tiempo limitado y battle passes.", symbol: "🎉" },
     ],
     badge: (index: number) => `Guía ${index + 1}`,
     action: "Abrir sección →",
@@ -92,8 +92,15 @@ export default function TutorialPage() {
                 {item.symbol}
               </div>
               <div className="relative z-10">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
-                  {item.symbol}
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
+                    {item.symbol}
+                  </div>
+                  {item.tag ? (
+                    <span className="rounded-full border border-red-400/20 bg-red-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-red-200">
+                      {item.tag}
+                    </span>
+                  ) : null}
                 </div>
                 <h3 className="font-display text-2xl font-black tracking-[0.05em] text-text transition-colors duration-300 group-hover:text-red-300">
                   {item.title}
