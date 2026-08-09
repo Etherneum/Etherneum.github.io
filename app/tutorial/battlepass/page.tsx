@@ -1,201 +1,81 @@
 import { TutorialSectionShell } from "@/components/TutorialSectionShell";
 
-const BATTLEPASS_REWARDS = {
-  normal: [
-    "100 free tokens",
-    "Small XP booster",
-    "Rare merge material",
-    "Battlepass-only avatar border",
-    "Tower ticket pack",
-  ],
-  premium: [
-    "Premium token bundle",
-    "Large XP booster",
-    "Exclusive unit skin",
-    "Extra daily quest slot",
-    "Battlepass premium exclusive pet",
-  ],
-};
-
-const SEASON_ONE_QUESTS = {
-  daily: [
-    "Roll 250 times",
-    "Beat wave 25 on tower 10 times",
-    "Play for 60 minutes",
-    "Kill 500 enemies",
-    "Deal 25m damage",
-  ],
-  weekly: [
-    "Roll 5000 times",
-    "Beat wave 50 on tower 10 times",
-    "Play for 720 minutes",
-    "Kill 5000 enemies",
-    "Deal 25b damage",
-  ],
-};
-
-// Reward totals (from user input)
-const REWARD_SUMMARY = {
-  free: {
-    units: 2,
-  },
-  premium: {
-    units: 4,
-  },
-  totals: {
-    traitShards: { free: 285, premium: 290 },
-    godEssence: { free: 24, premium: 39 },
-    secretEssence: { free: 35, premium: 57 },
-    tokens: { free: 40, premium: 65 },
-    infiniteTickets: { free: 8, premium: 13 },
-  },
-};
+const BATTLEPASS_LEVELS = [
+  { level: 1, free: "x10 Trait Shard", premium: "Demon Susuko" },
+  { level: 2, free: "x3 Secret Essence", premium: "x20 Trait Shard" },
+  { level: 3, free: "x10 Trait Shard", premium: "x5 Secret Essence" },
+  { level: 4, free: "x3 God Essence", premium: "x5 God Essence" },
+  { level: 5, free: "x15 Trait Shard", premium: "x25 Trait Shard" },
+  { level: 6, free: "x5 Secret Essence", premium: "x8 Secret Essence" },
+  { level: 7, free: "x15 Token", premium: "x5 God Essence" },
+  { level: 8, free: "x3 God Essence", premium: "x25 Token" },
+  { level: 9, free: "x15 Trait Shard", premium: "Secret Essence (+ x1 Luck Potion bonus, exact qty covered in screenshot)" },
+  { level: 10, free: "x5 Secret Essence", premium: "Demon Moru" },
+  { level: 11, free: "x20 Trait Shard", premium: "x35 Trait Shard" },
+  { level: 12, free: "x3 God Essence", premium: "x5 God Essence" },
+  { level: 13, free: "x3 Infinite Ticket", premium: "x8 Secret Essence" },
+  { level: 14, free: "x5 Secret Essence", premium: "x4 Time Potion" },
+  { level: 15, free: "Demon Hakuro", premium: "x5 God Essence" },
+  { level: 16, free: "x25 Trait Shard", premium: "x5 Infinite Ticket" },
+  { level: 17, free: "x5 God Essence", premium: "x45 Trait Shard" },
+  { level: 18, free: "x6 Secret Essence", premium: "x5 God Essence" },
+  { level: 19, free: "x3 Time Potion", premium: "x12 Secret Essence" },
+  { level: 20, free: "x5 God Essence", premium: "Demon Daburi" },
+  { level: 21, free: "x25 Token", premium: "x50 Trait Shard" },
+  { level: 22, free: "x8 Secret Essence", premium: "x5 God Essence" },
+  { level: 23, free: "x35 Trait Shard", premium: "x14 Secret Essence" },
+  { level: 24, free: "x5 God Essence", premium: "x40 Token" },
+  { level: 25, free: "x8 Secret Essence", premium: "x6 God Essence" },
+  { level: 26, free: "x40 Trait Shard", premium: "x16 Secret Essence" },
+  { level: 27, free: "x5 God Essence", premium: "x5 Time Potion" },
+  { level: 28, free: "x5 Infinite Ticket", premium: "x8 God Essence" },
+  { level: 29, free: "x4 Time Potion", premium: "x8 Infinite Ticket" },
+  { level: 30, free: "Makina", premium: "Cursed Makina" },
+];
 
 export default function BattlepassPage() {
   return (
     <TutorialSectionShell
       title="Battlepass"
-      description="Seasonal progression with 30 levels, earn rewards by grinding enemies and quests over 2–3 days."
+      description="Seasonal progression with 30 levels, split into free and premium rewards for the first battle pass season."
     >
       <section className="rounded-3xl border border-ink-line/70 bg-ink-surface p-6 shadow-sm">
-        <h2 className="font-display text-2xl font-black">Season rewards summary</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3 items-start">
-          {/* Free track */}
-          <div className="rounded-2xl border border-ink-line/70 bg-ink p-4 flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm uppercase tracking-[0.24em] text-text-faint">Free track</p>
-                <p className="mt-1 text-3xl font-black">{REWARD_SUMMARY.free.units} Units</p>
-              </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-sm font-semibold text-text">
-                🆓 Free
-              </div>
-            </div>
-
-            <p className="text-sm text-text-dim">Contains the free-track rewards shown in the summary above.</p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-text-faint">Season overview</p>
+            <h2 className="mt-2 font-display text-2xl font-black">Free track vs premium track</h2>
           </div>
-
-          {/* Totals card */}
-          <div className="rounded-2xl border border-ink-line/70 bg-gradient-to-br from-ink-surface/90 to-cyan-500/6 p-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm uppercase tracking-[0.24em] text-text-faint">Free | Premium</p>
-                <p className="mt-1 text-lg font-black">Split shown as Free | Premium</p>
-              </div>
-              <div className="text-sm font-semibold text-text-dim">30 levels</div>
-            </div>
-
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-ink p-3">
-                <p className="text-xs text-text-faint">Trait Shards</p>
-                <p className="mt-1 text-lg font-black">
-                  {REWARD_SUMMARY.totals.traitShards.free.toLocaleString()} <span className="mx-2 text-text-dim">|</span> {(REWARD_SUMMARY.totals.traitShards.free + REWARD_SUMMARY.totals.traitShards.premium).toLocaleString()}
-                </p>
-                <p className="text-xs text-text-dim mt-1">Free | Premium</p>
-              </div>
-              <div className="rounded-2xl bg-ink p-3">
-                <p className="text-xs text-text-faint">God Essence</p>
-                <p className="mt-1 text-lg font-black">
-                  {REWARD_SUMMARY.totals.godEssence.free.toLocaleString()} <span className="mx-2 text-text-dim">|</span> {(REWARD_SUMMARY.totals.godEssence.free + REWARD_SUMMARY.totals.godEssence.premium).toLocaleString()}
-                </p>
-                <p className="text-xs text-text-dim mt-1">Free | Premium</p>
-              </div>
-              <div className="rounded-2xl bg-ink p-3">
-                <p className="text-xs text-text-faint">Secret Essence</p>
-                <p className="mt-1 text-lg font-black">
-                  {REWARD_SUMMARY.totals.secretEssence.free.toLocaleString()} <span className="mx-2 text-text-dim">|</span> {(REWARD_SUMMARY.totals.secretEssence.free + REWARD_SUMMARY.totals.secretEssence.premium).toLocaleString()}
-                </p>
-                <p className="text-xs text-text-dim mt-1">Free | Premium</p>
-              </div>
-              <div className="rounded-2xl bg-ink p-3">
-                <p className="text-xs text-text-faint">Tokens</p>
-                <p className="mt-1 text-lg font-black">
-                  {REWARD_SUMMARY.totals.tokens.free.toLocaleString()} <span className="mx-2 text-text-dim">|</span> {(REWARD_SUMMARY.totals.tokens.free + REWARD_SUMMARY.totals.tokens.premium).toLocaleString()}
-                </p>
-                <p className="text-xs text-text-dim mt-1">Free | Premium</p>
-              </div>
-            </div>
-
-            <div className="mt-4 rounded-2xl bg-ink p-3">
-              <p className="text-xs text-text-faint">Infinite Tickets</p>
-              <p className="mt-1 text-lg font-black">
-                {REWARD_SUMMARY.totals.infiniteTickets.free.toLocaleString()} <span className="mx-2 text-text-dim">|</span> {(REWARD_SUMMARY.totals.infiniteTickets.free + REWARD_SUMMARY.totals.infiniteTickets.premium).toLocaleString()}
-              </p>
-              <p className="text-xs text-text-dim mt-1">Free | Premium</p>
-            </div>
+          <div className="rounded-full border border-ink-line/70 bg-ink px-4 py-2 text-sm font-semibold text-text">
+            30 levels • First battle pass
           </div>
+        </div>
 
-          {/* Premium track */}
-          <div className="rounded-2xl border border-amber-400/20 bg-gradient-to-br from-amber-500/6 to-ink p-4 flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm uppercase tracking-[0.24em] text-text-faint">Premium track</p>
-                <p className="mt-1 text-3xl font-black">{REWARD_SUMMARY.premium.units} Units</p>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-ink-line/70 bg-ink">
+          <div className="grid grid-cols-[90px_1fr_1fr] border-b border-ink-line/70 bg-ink-surface/80 text-sm font-semibold uppercase tracking-[0.24em] text-text-faint">
+            <div className="px-4 py-3">Level</div>
+            <div className="border-l border-ink-line/70 px-4 py-3">Free track</div>
+            <div className="border-l border-ink-line/70 px-4 py-3">Premium track</div>
+          </div>
+          <div className="divide-y divide-ink-line/70">
+            {BATTLEPASS_LEVELS.map((entry) => (
+              <div key={entry.level} className="grid grid-cols-[90px_1fr_1fr] text-sm">
+                <div className="px-4 py-3 font-semibold text-text">{entry.level}</div>
+                <div className="border-l border-ink-line/70 px-4 py-3 text-text-dim">{entry.free}</div>
+                <div className="border-l border-ink-line/70 px-4 py-3 text-text-dim">{entry.premium}</div>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-3 py-1 text-sm font-semibold text-amber-200">
-                👑 Premium
-              </div>
-            </div>
-
-            <p className="text-sm text-text-dim">Contains the premium-track rewards shown in the summary above.</p>
+            ))}
           </div>
         </div>
       </section>
-      <div className="grid gap-8">
-        <section className="rounded-3xl border border-ink-line/70 bg-ink-surface p-6 shadow-sm">
-          <h2 className="font-display text-2xl font-black">How it works</h2>
-          <p className="mt-4 text-sm leading-7 text-text-dim">
-            The Battlepass has 30 levels and is designed to finish in about 2–3 days of regular play.
-            Progress is earned by defeating enemies, completing tower waves, and playing through daily/weekly quests.
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-ink-line/70 bg-ink-surface p-4">
-              <p className="text-sm uppercase tracking-[0.24em] text-text-faint">Levels</p>
-              <p className="mt-2 text-3xl font-black">30</p>
-            </div>
-            <div className="rounded-2xl border border-ink-line/70 bg-ink-surface p-4">
-              <p className="text-sm uppercase tracking-[0.24em] text-text-faint">Premium cost</p>
-              <p className="mt-2 text-3xl font-black">749 Robux</p>
-            </div>
-          </div>
-        </section>
 
-        <section className="rounded-3xl border border-ink-line/70 bg-ink-surface p-6 shadow-sm">
-          <h2 className="font-display text-2xl font-black">Rewards</h2>
-          <p className="mt-4 text-sm text-text-dim">Detailed reward lists were removed — the season summary above reflects the exact rewards provided.</p>
-        </section>
-
-        <section className="rounded-3xl border border-ink-line/70 bg-ink-surface p-6 shadow-sm">
-          <h2 className="font-display text-2xl font-black">Season 1 quests</h2>
-          <div className="mt-6 grid gap-4 xl:grid-cols-2">
-            <div className="rounded-2xl border border-ink-line/70 bg-ink p-4">
-              <h3 className="font-semibold">Daily quests</h3>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-text-dim">
-                {SEASON_ONE_QUESTS.daily.map((quest) => (
-                  <li key={quest}>• {quest}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-ink-line/70 bg-ink p-4">
-              <h3 className="font-semibold">Weekly quests</h3>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-text-dim">
-                {SEASON_ONE_QUESTS.weekly.map((quest) => (
-                  <li key={quest}>• {quest}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="rounded-3xl border border-ink-line/70 bg-ink-surface p-6 shadow-sm">
-          <h2 className="font-display text-2xl font-black">Battlepass notes</h2>
-          <ul className="mt-4 space-y-3 text-sm leading-7 text-text-dim">
-            <li>Battlepass progress comes from both kills and quest completion.</li>
-            <li>Normal rewards are free; premium gives extra exclusive items.</li>
-            <li>Update this page whenever season rewards or quest lists change.</li>
-          </ul>
-        </section>
-      </div>
+      <section className="rounded-3xl border border-ink-line/70 bg-ink-surface p-6 shadow-sm">
+        <h2 className="font-display text-2xl font-black">How to read this page</h2>
+        <ul className="mt-4 space-y-3 text-sm leading-7 text-text-dim">
+          <li>• The left column shows the free track rewards.</li>
+          <li>• The right column shows the premium track rewards.</li>
+          <li>• The page is structured to mirror the first battle pass as a reference for the new Limited Time Events section.</li>
+        </ul>
+      </section>
     </TutorialSectionShell>
   );
 }

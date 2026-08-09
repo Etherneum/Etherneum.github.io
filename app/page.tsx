@@ -64,11 +64,13 @@ const QUICK_LINKS = {
     { href: "/tierlist", label: "Tier List" },
     { href: "/cards", label: "Cards" },
     { href: "/tutorial", label: "Guide" },
+    { href: "/local", label: "Local Preview" },
   ],
   es: [
     { href: "/tierlist", label: "Lista de niveles" },
     { href: "/cards", label: "Cartas" },
     { href: "/tutorial", label: "Guía" },
+    { href: "/local", label: "Vista local" },
   ],
 };
 
