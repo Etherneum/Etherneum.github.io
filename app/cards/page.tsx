@@ -436,59 +436,13 @@ export default function CardsPage() {
         <Portal>
           <div className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ease-out ${modalMounted ? "bg-black/40 backdrop-blur-sm" : "bg-black/0"}`}>
               <div className="absolute inset-0" onClick={() => setSelected(null)} />
-            <div className={`relative w-[90%] max-w-3xl origin-center rounded-xl border bg-ink-surface p-4 shadow-[0_25px_60px_-20px_rgba(0,0,0,0.75)] transform-gpu transition-all duration-300 ease-out ${modalMounted ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-3"}`}>
-              <div className="flex items-start justify-between gap-4">
-                <h2 className="font-display text-2xl font-black">{selected.name}</h2>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setSelectedLevel(1)}
-                    className={`rounded-md px-2 py-1 text-sm font-medium ${selectedLevel === 1 ? 'bg-white/10' : 'bg-transparent'}`}
-                    type="button"
-                  >
-                    Lvl 1
-                  </button>
-                  <button
-                    onClick={() => setSelectedLevel(7)}
-                    className={`rounded-md px-2 py-1 text-sm font-medium ${selectedLevel === 7 ? 'bg-white/10' : 'bg-transparent'}`}
-                    type="button"
-                  >
-                    Lvl 7
-                  </button>
-                  {getDetailsById(selected.id)?.forms?.length ? (
-                    <button
-                      onClick={() => setSelectedFormIndex((prev) => {
-                        const forms = getDetailsById(selected.id)!.forms!;
-                        return (prev + 1) % forms.length;
-                      })}
-                      className="ml-2 rounded-md bg-rose-500 px-3 py-1 text-sm font-semibold text-white hover:bg-rose-600"
-                      type="button"
-                    >
-                      Switch Form
-                    </button>
-                  ) : null}
-                  <button className="ml-2 text-text-dim" onClick={() => setSelected(null)}>×</button>
-                </div>
-              </div>
-              <div className="mt-3 flex gap-4">
-                <div
-                  className="h-36 w-36 flex-shrink-0 overflow-hidden rounded-lg"
-                  style={
-                    selected.rarity === "Mythic"
-                      ? { backgroundColor: RARITY_META[selected.rarity].hex + "14" }
-                      : { backgroundColor: RARITY_META[selected.rarity].hex + "08" }
-                  }
-                >
-                  {selected.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={selected.image} alt={selected.name} className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center">No image</div>
-                  )}
-                </div>
-                <div className="flex-1 max-h-[60vh] overflow-y-auto">
-                  <div className="flex items-center gap-2">
+            <div className={`relative w-[92%] max-w-4xl origin-center rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-ink-surface/95 via-ink-surface/90 to-ink-surface2/95 p-4 shadow-[0_30px_80px_-24px_rgba(0,0,0,0.85)] transform-gpu transition-all duration-300 ease-out ${modalMounted ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-3"}`}>
+              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                  <h2 className="font-display text-2xl font-black tracking-[0.03em] text-text">{selected.name}</h2>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
                     <div
-                      className="w-fit rounded-full border px-3 py-1 font-mono text-xs font-bold uppercase"
+                      className="w-fit rounded-full border px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.2em]"
                       style={selected.rarity === "Mythic" ? {
                         color: "#f8fafc",
                         borderColor: "transparent",
@@ -499,70 +453,91 @@ export default function CardsPage() {
                     >
                       {selected.rarity}
                     </div>
-                    <div className="w-fit rounded-full border px-3 py-1 font-mono text-xs font-bold uppercase" style={{ color: "#111", borderColor: "#ccc", backgroundColor: "#f3f4f6" }}>{QUALITY_TIER_LIST.find(r=>r.units.includes(selected.name))?.label ?? "—"}</div>
+                    <div className="w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-text-dim">
+                      {QUALITY_TIER_LIST.find(r => r.units.includes(selected.name))?.label ?? "—"}
+                    </div>
                   </div>
-                  <div className="mt-4 grid grid-cols-2 gap-3">
-                    <div>
-                      <h4 className="font-semibold">Damage</h4>
-                      <p className="text-sm font-semibold text-text">
-                        {effectiveStats?.damage?.toLocaleString() ?? "—"}
-                        {(selectedTrait || selectedMutation) && (
-                          <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-200 animate-pulse">
-                            Modified
-                          </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={() => setSelectedLevel(1)}
+                    className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all ${selectedLevel === 1 ? "bg-white/12 text-white shadow-inner" : "bg-white/5 text-text-dim hover:bg-white/10 hover:text-text"}`}
+                    type="button"
+                  >
+                    Lvl 1
+                  </button>
+                  <button
+                    onClick={() => setSelectedLevel(7)}
+                    className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all ${selectedLevel === 7 ? "bg-white/12 text-white shadow-inner" : "bg-white/5 text-text-dim hover:bg-white/10 hover:text-text"}`}
+                    type="button"
+                  >
+                    Lvl 7
+                  </button>
+                  {getDetailsById(selected.id)?.forms?.length ? (
+                    <button
+                      onClick={() => setSelectedFormIndex((prev) => {
+                        const forms = getDetailsById(selected.id)!.forms!;
+                        return (prev + 1) % forms.length;
+                      })}
+                      className="rounded-full bg-rose-500/90 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-rose-500"
+                      type="button"
+                    >
+                      Switch Form
+                    </button>
+                  ) : null}
+                  <button className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1.5 text-lg text-text-dim transition hover:bg-white/10 hover:text-text" onClick={() => setSelected(null)}>×</button>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-col gap-4 lg:flex-row">
+                <div className="w-full lg:max-w-[220px]">
+                  <div
+                    className="overflow-hidden rounded-[1.2rem] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+                    style={
+                      selected.rarity === "Mythic"
+                        ? { backgroundColor: RARITY_META[selected.rarity].hex + "14" }
+                        : { backgroundColor: RARITY_META[selected.rarity].hex + "08" }
+                    }
+                  >
+                    {selected.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={selected.image} alt={selected.name} className="h-full w-full object-contain p-2" />
+                    ) : (
+                      <div className="flex h-48 w-full items-center justify-center text-sm text-text-dim">No image</div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex-1 max-h-[62vh] overflow-y-auto pr-1">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {[
+                      { label: "Damage", value: effectiveStats?.damage, base: originalStats?.damage, accent: "from-rose-500/20 to-transparent" },
+                      { label: "Defense", value: effectiveStats?.defense, base: originalStats?.defense, accent: "from-cyan-500/20 to-transparent" },
+                      { label: "Health", value: effectiveStats?.health, base: originalStats?.health, accent: "from-emerald-500/20 to-transparent" },
+                      { label: "Speed", value: effectiveStats?.speed, base: originalStats?.speed, accent: "from-violet-500/20 to-transparent" },
+                    ].map((stat) => (
+                      <div key={stat.label} className={`rounded-[1rem] border border-white/10 bg-gradient-to-br ${stat.accent} p-3`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <h4 className="text-sm font-semibold text-text">{stat.label}</h4>
+                          {(selectedTrait || selectedMutation) && (
+                            <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-200">
+                              Modified
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-2 text-lg font-semibold text-white">
+                          {stat.value?.toLocaleString() ?? "—"}
+                        </p>
+                        {stat.base != null && (selectedTrait || selectedMutation) && (
+                          <p className="mt-1 text-[0.75rem] text-text-dim">Base {stat.base.toLocaleString()}</p>
                         )}
-                      </p>
-                      {(selectedTrait || selectedMutation) && originalStats?.damage != null && (
-                        <p className="mt-1 text-[0.75rem] text-text-dim">Base {originalStats.damage.toLocaleString()}</p>
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Defense</h4>
-                      <p className="text-sm font-semibold text-text">
-                        {effectiveStats?.defense?.toLocaleString() ?? "—"}
-                        {(selectedTrait || selectedMutation) && (
-                          <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-200">
-                            Modified
-                          </span>
-                        )}
-                      </p>
-                      {(selectedTrait || selectedMutation) && originalStats?.defense != null && (
-                        <p className="mt-1 text-[0.75rem] text-text-dim">Base {originalStats.defense.toLocaleString()}</p>
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Health</h4>
-                      <p className="text-sm font-semibold text-text">
-                        {effectiveStats?.health?.toLocaleString() ?? "—"}
-                        {(selectedTrait || selectedMutation) && (
-                          <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-200">
-                            Modified
-                          </span>
-                        )}
-                      </p>
-                      {(selectedTrait || selectedMutation) && originalStats?.health != null && (
-                        <p className="mt-1 text-[0.75rem] text-text-dim">Base {originalStats.health.toLocaleString()}</p>
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Speed (sec/atk)</h4>
-                      <p className="text-sm font-semibold text-text">
-                        {effectiveStats?.speed?.toLocaleString() ?? "—"}
-                        {(selectedTrait || selectedMutation) && (
-                          <span className="ml-2 inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-200">
-                            Modified
-                          </span>
-                        )}
-                      </p>
-                      {(selectedTrait || selectedMutation) && originalStats?.speed != null && (
-                        <p className="mt-1 text-[0.75rem] text-text-dim">Base {originalStats.speed.toLocaleString()}</p>
-                      )}
-                      <p className="mt-1 text-[0.75rem] text-text-faint">Lower is faster</p>
-                    </div>
+                        {stat.label === "Speed" && <p className="mt-1 text-[0.75rem] text-text-faint">Lower is faster</p>}
+                      </div>
+                    ))}
                   </div>
 
                   <div
-                    className="mt-4 rounded-xl border p-3 shadow-sm"
+                    className="mt-4 rounded-[1.1rem] border border-white/10 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
                     style={{
                       borderColor: selectedRarityMeta?.hex ? `${selectedRarityMeta.hex}55` : undefined,
                       background: selectedRarityMeta?.hex
@@ -570,9 +545,9 @@ export default function CardsPage() {
                         : undefined,
                     }}
                   >
-                    <div className="mb-2 flex items-center gap-2">
+                    <div className="mb-3 flex items-center gap-2">
                       <div
-                        className="rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em]"
+                        className="rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em]"
                         style={{
                           backgroundColor: selectedRarityMeta?.hex ? `${selectedRarityMeta.hex}22` : undefined,
                           color: selectedRarityMeta?.hex ?? undefined,
@@ -587,7 +562,7 @@ export default function CardsPage() {
                         <div className="text-sm font-semibold text-white" style={selectedRarityTitleStyle}>
                           {getDetailsById(selected.id)!.ability!.title}
                         </div>
-                        <div className="text-sm leading-relaxed text-text-faint">
+                        <div className="text-sm leading-6 text-text-faint">
                           {getDetailsById(selected.id)!.ability!.description}
                         </div>
                       </div>
@@ -596,8 +571,8 @@ export default function CardsPage() {
                     )}
                   </div>
 
-                  <div className="mt-4">
-                    <h4 className="font-semibold">Trait</h4>
+                  <div className="mt-4 rounded-[1.1rem] border border-white/10 bg-white/5 p-4">
+                    <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-text-faint">Trait</h4>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {TRAIT_TIERS.map((tier) => (
                         tier.traits.map((tr) => {
@@ -606,7 +581,7 @@ export default function CardsPage() {
                             <button
                               key={tr.name}
                               onClick={() => setSelectedTrait(active ? null : tr.name)}
-                              className={`rounded px-3 py-1 text-sm font-medium ${active ? 'ring-2 ring-offset-1' : ''}`}
+                              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-all ${active ? "ring-2 ring-offset-1 ring-white/20" : ""}`}
                               style={{ backgroundColor: tier.color + '22', border: `1px solid ${tier.color}`, color: tier.color }}
                             >
                               {tr.name}
@@ -617,7 +592,7 @@ export default function CardsPage() {
                     </div>
                     {selectedTrait && <div className="mt-2 text-sm text-text-faint">{TRAIT_TIERS.flatMap(t => t.traits).find(x => x.name === selectedTrait)?.buffs}</div>}
 
-                    <h4 className="font-semibold mt-4">Mutation</h4>
+                    <h4 className="mt-4 text-sm font-semibold uppercase tracking-[0.2em] text-text-faint">Mutation</h4>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {MUTATIONS.map((m) => {
                         const active = selectedMutation === m.name;
@@ -625,7 +600,7 @@ export default function CardsPage() {
                           <button
                             key={m.name}
                             onClick={() => setSelectedMutation(active ? null : m.name)}
-                            className={`rounded px-3 py-1 text-sm font-medium ${active ? 'ring-2 ring-offset-1' : ''}`}
+                            className={`rounded-full px-3 py-1.5 text-sm font-medium transition-all ${active ? "ring-2 ring-offset-1 ring-white/20" : ""}`}
                             style={{ backgroundColor: m.color + '22', border: `1px solid ${m.color}`, color: m.color }}
                           >
                             {m.name}

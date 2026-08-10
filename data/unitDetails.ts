@@ -170,6 +170,10 @@ const KNOWN_DETAIL_OVERRIDES: Record<string, Partial<UnitDetails>> = {
       defense: 1.5,
       health: 75000,
       speed: 1
+    },
+    ability: {
+      title: "Wood Attack: Forest Destruction",
+      description: "Hashyrama drives a wooden root underground before erupting it beneath nearby enemies, while wounded, Hashyrama restores health."
     }
   },
   kebashi: {
@@ -202,6 +206,10 @@ const KNOWN_DETAIL_OVERRIDES: Record<string, Partial<UnitDetails>> = {
       defense: 1.33,
       health: 17500,
       speed: 3
+    },
+    ability: {
+      title: "Toxic Dominion",
+      description: "Magullan coats his attacks in deadly venom, poisoning enemies and draining their health over time."
     }
   },
   susuko: {
@@ -210,6 +218,10 @@ const KNOWN_DETAIL_OVERRIDES: Record<string, Partial<UnitDetails>> = {
       defense: 1.33,
       health: 30000,
       speed: 1
+    },
+    ability: {
+      title: "Black Flames Ribguard",
+      description: "Black flames erupt from the user as a ghostly ribcage shield forms, boosting defense and attack power for a short duration."
     }
   },
   maru: {
@@ -258,6 +270,10 @@ const KNOWN_DETAIL_OVERRIDES: Record<string, Partial<UnitDetails>> = {
       defense: 1.5,
       health: 85000,
       speed: 4
+    },
+    ability: {
+      title: "Haymaker",
+      description: "Yudero stores damage taken, adds it to the next attack, then heals 50 percent."
     }
   },
   deyo: {
