@@ -157,9 +157,6 @@ export default function HomePage() {
   return (
     <div className="flex flex-col gap-16">
       <section className="isolate -mx-4 sm:-mx-6 flex min-h-[72vh] flex-col items-center justify-center overflow-hidden px-6 py-16 sm:px-10 sm:py-20 bg-transparent">
-        <div className="absolute left-4 top-6 h-24 w-24 rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute right-6 bottom-14 h-36 w-36 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_10%,rgba(255,255,255,0.04)_55%,transparent_100%)]" />
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-6 text-center">
           <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)]">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
