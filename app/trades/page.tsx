@@ -253,16 +253,16 @@ export default function TradesPage() {
         <p className="mt-2 max-w-2xl text-sm text-text-faint">{copy.intro}</p>
       </div>
 
-      <div className="rounded-3xl border border-amber-500/40 bg-amber-500/10 p-6 text-center shadow-lg shadow-amber-500/10">
-        <p className="text-4xl font-black uppercase tracking-[0.35em] text-amber-400 sm:text-5xl">{copy.underConstructionTitle}</p>
-        <p className="mt-3 text-sm font-semibold uppercase tracking-[0.25em] text-amber-300">{copy.underConstructionBody}</p>
+      <div className="rounded-[2rem] border border-amber-400/35 bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-rose-500/10 p-6 text-center shadow-[0_24px_70px_-30px_rgba(251,146,60,0.4)]">
+        <p className="text-4xl font-black uppercase tracking-[0.35em] text-amber-300 sm:text-5xl">{copy.underConstructionTitle}</p>
+        <p className="mt-3 text-sm font-semibold uppercase tracking-[0.25em] text-amber-200/90">{copy.underConstructionBody}</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <button
           onClick={() => setMode("value")}
           disabled={UNDER_CONSTRUCTION}
-          className={`rounded-2xl border p-6 text-left transition ${mode === "value" ? "border-rarity-god bg-rarity-god/10" : "border-ink-line bg-ink-surface"} ${UNDER_CONSTRUCTION ? "cursor-not-allowed opacity-60" : ""}`}
+          className={`rounded-[1.5rem] border p-6 text-left transition-all duration-300 ${mode === "value" ? "border-amber-400/40 bg-gradient-to-br from-amber-500/12 via-orange-500/8 to-transparent shadow-[0_18px_45px_-24px_rgba(251,146,60,0.35)]" : "border-white/10 bg-white/5 shadow-[0_12px_30px_-24px_rgba(0,0,0,0.45)]"} ${UNDER_CONSTRUCTION ? "cursor-not-allowed opacity-75" : "hover:-translate-y-0.5"}`}
         >
           <h2 className="font-display text-2xl font-black">{copy.tradeValue}</h2>
           <p className="mt-2 text-sm text-text-faint">{copy.tradeValueBody}</p>
@@ -270,7 +270,7 @@ export default function TradesPage() {
         </button>
         <button
           onClick={() => setMode("calculator")}
-          className={`rounded-2xl border p-6 text-left transition ${mode === "calculator" ? "border-rarity-legendary bg-rarity-legendary/10" : "border-ink-line bg-ink-surface"}`}
+          className={`rounded-[1.5rem] border p-6 text-left transition-all duration-300 ${mode === "calculator" ? "border-amber-300/40 bg-gradient-to-br from-orange-500/12 via-amber-500/8 to-transparent shadow-[0_18px_45px_-24px_rgba(251,146,60,0.35)]" : "border-white/10 bg-white/5 shadow-[0_12px_30px_-24px_rgba(0,0,0,0.45)]"}`}
         >
           <h2 className="font-display text-2xl font-black">{copy.tradeCalculator}</h2>
           <p className="mt-2 text-sm text-text-faint">{copy.tradeCalculatorBody}</p>
@@ -279,7 +279,7 @@ export default function TradesPage() {
 
       {mode === "value" ? (
         <div className="relative">
-          <div className="rounded-2xl border border-ink-line bg-ink-surface p-6">
+          <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 via-white/5 to-amber-500/8 p-6 shadow-[0_24px_70px_-36px_rgba(0,0,0,0.5)]">
             <h3 className="font-display text-xl font-black">{copy.valueTracker}</h3>
             <p className="mt-2 text-sm text-text-faint">{copy.valueTrackerBody}</p>
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -318,7 +318,7 @@ export default function TradesPage() {
         </div>
       ) : (
         <div className="grid gap-6 xl:grid-cols-[1fr_1fr]">
-          <div className="rounded-2xl border border-ink-line bg-ink-surface p-6">
+          <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 via-white/5 to-orange-500/8 p-6 shadow-[0_24px_70px_-36px_rgba(0,0,0,0.5)]">
             <div className="flex items-center justify-between gap-3">
               <h3 className="font-display text-xl font-black">{copy.iGive}</h3>
               <span className="text-sm text-text-faint">{copy.upToSix}</span>
@@ -362,7 +362,7 @@ export default function TradesPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-ink-line bg-ink-surface p-6">
+          <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 via-white/5 to-orange-500/8 p-6 shadow-[0_24px_70px_-36px_rgba(0,0,0,0.5)]">
             <div className="flex items-center justify-between gap-3">
               <h3 className="font-display text-xl font-black">{copy.iGet}</h3>
               <span className="text-sm text-text-faint">{copy.upToSix}</span>
@@ -406,7 +406,7 @@ export default function TradesPage() {
             </div>
           </div>
 
-          <div className="xl:col-span-2 rounded-2xl border border-ink-line bg-ink-surface p-6">
+          <div className="xl:col-span-2 rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 via-white/5 to-amber-500/10 p-6 shadow-[0_24px_70px_-36px_rgba(0,0,0,0.5)]">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h3 className="font-display text-xl font-black">{copy.result}</h3>
