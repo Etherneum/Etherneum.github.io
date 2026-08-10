@@ -93,17 +93,9 @@ export default function NavBar() {
               type="button"
               onClick={() => setSettingsOpen((v) => !v)}
               aria-label={settingsCopy.open}
-              className="group flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-white/10 to-white/5 px-3 py-2 text-sm font-semibold text-text shadow-[0_12px_28px_-14px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:border-rarity-god/40 hover:bg-white/10"
+              className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-white/10 to-white/5 text-lg text-text shadow-[0_12px_28px_-14px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:border-rarity-god/40 hover:bg-white/10"
             >
-              <span className="text-base transition-transform duration-300 group-hover:rotate-90">⚙</span>
-              <span className="hidden text-[11px] uppercase tracking-[0.24em] sm:inline">
-                {language === "es" ? "Ajustes" : "Settings"}
-              </span>
-              <span className="flex items-center gap-1">
-                {reduceMotion ? <span className="h-2 w-2 rounded-full bg-emerald-400" /> : <span className="h-2 w-2 rounded-full bg-white/30" />}
-                {lowGraphics ? <span className="h-2 w-2 rounded-full bg-sky-400" /> : <span className="h-2 w-2 rounded-full bg-white/30" />}
-                {compactMode ? <span className="h-2 w-2 rounded-full bg-amber-400" /> : <span className="h-2 w-2 rounded-full bg-white/30" />}
-              </span>
+              <span className="transition-transform duration-300 group-hover:rotate-90">⚙</span>
             </button>
             {settingsOpen && (
               <div className="absolute right-0 mt-2 w-56 rounded-[1.1rem] border border-white/10 bg-ink-surface/95 p-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-[fadeIn_0.2s_ease-out]">
