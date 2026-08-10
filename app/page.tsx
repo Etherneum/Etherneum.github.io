@@ -155,25 +155,40 @@ export default function HomePage() {
   }, [hoveredLetter]);
 
   return (
-    <div className="flex flex-col gap-16">
-      <section className="isolate -mx-4 sm:-mx-6 flex min-h-[72vh] flex-col items-center justify-center overflow-hidden px-6 py-16 sm:px-10 sm:py-20 bg-transparent">
-        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-6 text-center">
+    <div className="flex flex-col gap-20 sm:gap-24">
+      <section className="isolate -mx-4 flex min-h-[78vh] flex-col items-center justify-center overflow-hidden bg-transparent px-6 py-20 sm:-mx-6 sm:px-10 sm:py-24 lg:min-h-[84vh] lg:px-12 lg:py-32">
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-8 text-center lg:gap-10">
           <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)]">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
             {copy.badge}
           </div>
           <div className="flex flex-col items-center gap-4">
             <h1 className="font-display text-[3.8rem] font-black uppercase leading-[0.88] tracking-[-0.04em] text-rose-100 drop-shadow-[0_0_30px_rgba(244,63,94,0.3)] sm:text-[5.5rem]">
-              {SITE_TITLE}
+              {SITE_TITLE.split("").map((letter, index) => {
+                const isNearby = hoveredLetter !== null && Math.abs(index - hoveredLetter) <= 1;
+                const displayChar = isNearby && glitchChars[index] ? glitchChars[index] : letter;
+                return (
+                  <span
+                    key={`${letter}-${index}`}
+                    onMouseEnter={() => setHoveredLetter(index)}
+                    onMouseLeave={() => setHoveredLetter(null)}
+                    className="inline-block px-0.5 transition-all duration-200"
+                  >
+                    <span className={`transition-all duration-200 ${isNearby ? "text-rose-200" : "text-rose-100"}`}>
+                      {displayChar}
+                    </span>
+                  </span>
+                );
+              })}
             </h1>
             <p className="text-sm uppercase tracking-[0.45em] text-rose-200/90 sm:text-base">
               Roll Anime to Fight guide
             </p>
           </div>
-          <p className="max-w-2xl px-4 font-body text-base leading-7 text-white/75 sm:text-lg">
+          <p className="max-w-3xl px-4 font-body text-base leading-8 text-white/75 sm:text-lg lg:text-xl">
             {copy.subtitle}
           </p>
-          <div className="flex flex-wrap justify-center gap-3 pt-1">
+          <div className="flex flex-wrap justify-center gap-3 pt-2">
             {QUICK_LINKS[language].map((l, i) => (
               <Link
                 key={l.href}
@@ -191,7 +206,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="surface-card p-6 sm:p-8">
+      <section className="surface-card p-8 sm:p-10 lg:p-12">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="font-display text-2xl font-black tracking-[0.06em] text-text">
@@ -209,7 +224,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:gap-6">
           {copy.features.map((feature) => (
             <div key={feature.title} className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/8 to-white/3 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h3 className="font-display text-lg font-black tracking-[0.04em] text-text">

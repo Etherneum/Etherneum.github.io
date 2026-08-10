@@ -31,11 +31,13 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
-  background-color: #05070f;
+  background-color: #04060d;
   background-image:
-    radial-gradient(circle at 14% 14%, rgba(59, 130, 246, 0.14), transparent 24%),
-    radial-gradient(circle at 86% 18%, rgba(248, 113, 113, 0.12), transparent 22%),
-    radial-gradient(circle at 28% 84%, rgba(56, 189, 248, 0.08), transparent 20%);
+    radial-gradient(circle at 12% 12%, rgba(249, 115, 22, 0.2), transparent 24%),
+    radial-gradient(circle at 84% 16%, rgba(59, 130, 246, 0.16), transparent 24%),
+    radial-gradient(circle at 20% 84%, rgba(236, 72, 153, 0.14), transparent 26%),
+    radial-gradient(circle at 78% 82%, rgba(34, 211, 238, 0.14), transparent 22%),
+    linear-gradient(135deg, #04060d 0%, #080c16 42%, #0c1221 100%);
   color: var(--text-default);
   font-family: var(--font-body);
   letter-spacing: 0.01em;
@@ -44,31 +46,34 @@ body {
 body::before {
   content: "";
   position: fixed;
-  inset: -10%;
+  inset: -12%;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.075) 0 1px, transparent 2px),
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0 1px, transparent 2px),
     radial-gradient(circle at 70% 30%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
     radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0 1px, transparent 2px),
     radial-gradient(circle at 85% 75%, rgba(255,255,255,0.04) 0 1px, transparent 2px);
-  background-size: 240px 240px, 280px 280px, 320px 320px, 260px 260px;
-  opacity: 0.65;
-  animation: drift 24s linear infinite;
+  background-size: 260px 260px, 260px 260px, 240px 240px, 280px 280px, 320px 320px, 260px 260px;
+  opacity: 0.75;
+  animation: drift 28s linear infinite;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.35));
   z-index: 0;
 }
 
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -8%;
   pointer-events: none;
   background:
-    radial-gradient(circle at 15% 20%, rgba(248, 113, 113, 0.16), transparent 22%),
-    radial-gradient(circle at 80% 25%, rgba(167, 139, 250, 0.14), transparent 24%),
-    radial-gradient(circle at 30% 80%, rgba(45, 212, 191, 0.1), transparent 20%),
-    radial-gradient(circle at 70% 70%, rgba(250, 204, 21, 0.08), transparent 18%);
-  filter: blur(40px);
-  animation: pulse-float 10s ease-in-out infinite alternate;
+    radial-gradient(circle at 15% 20%, rgba(248, 113, 113, 0.24), transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(129, 140, 248, 0.16), transparent 26%),
+    radial-gradient(circle at 28% 82%, rgba(45, 212, 191, 0.14), transparent 24%),
+    radial-gradient(circle at 72% 72%, rgba(250, 204, 21, 0.1), transparent 20%);
+  filter: blur(60px);
+  animation: pulse-float 12s ease-in-out infinite alternate;
   z-index: 0;
 }
 
