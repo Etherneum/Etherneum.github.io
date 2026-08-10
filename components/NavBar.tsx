@@ -62,13 +62,13 @@ export default function NavBar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-line/70 bg-ink/95 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-display text-xl tracking-[0.2em] text-text sm:text-2xl">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <span className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-text shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)]">
             Etherneum
           </span>
         </Link>
-        <div className="flex flex-wrap items-center gap-3 border-l border-ink-line/70 pl-3 sm:gap-4 sm:pl-4">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <nav className="flex flex-wrap items-center gap-4 sm:gap-6">
             {links.map((link) => {
               const active =
@@ -93,7 +93,7 @@ export default function NavBar() {
               type="button"
               onClick={() => setSettingsOpen((v) => !v)}
               aria-label={settingsCopy.open}
-              className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-text shadow-[0_8px_20px_-10px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-0.5 hover:border-rarity-god/40 hover:bg-white/10"
+              className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-text shadow-[0_10px_24px_-12px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:border-rarity-god/40 hover:bg-white/10"
             >
               <span className="transition-transform duration-300 group-hover:rotate-90">⚙</span>
             </button>

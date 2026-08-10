@@ -156,52 +156,35 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-16">
-      <section className="relative isolate flex min-h-screen w-[100vw] left-[50%] translate-x-[-50%] flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(235,77,102,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.16),transparent_28%),linear-gradient(180deg,#080a11 0%,#11172a 100%)] pb-8 shadow-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,113,113,0.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_35%)]" />
-        <div className="absolute inset-y-28 left-6 h-28 w-28 rounded-full border border-red-400/20 blur-3xl" />
-        <div className="absolute right-8 top-20 h-24 w-24 rounded-full border border-fuchsia-400/15 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgba(255,255,255,0.05)_55%)]" />
-        <div className="relative z-10 flex w-full flex-col items-center justify-center gap-6 text-center">
+      <section className="hero-panel isolate -mx-4 sm:-mx-6 flex min-h-[72vh] flex-col items-center justify-center overflow-hidden px-6 py-16 sm:px-10 sm:py-20">
+        <div className="absolute left-4 top-6 h-24 w-24 rounded-full border border-white/10 bg-white/5 blur-3xl" />
+        <div className="absolute right-6 bottom-14 h-36 w-36 rounded-full border border-cyan-400/15 bg-cyan-500/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_10%,rgba(255,255,255,0.04)_55%,transparent_100%)]" />
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-6 text-center">
           <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)]">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
             {copy.badge}
           </div>
-          <div className="group flex flex-col items-center gap-4">
-            <h1 className="font-display text-[5.5rem] font-black uppercase leading-[0.88] tracking-[-0.06em] text-rose-100 drop-shadow-[0_0_30px_rgba(244,63,94,0.35)] sm:text-[8.5rem]">
-              {SITE_TITLE.split("").map((letter, index) => {
-                const isNearby = hoveredLetter !== null && Math.abs(index - hoveredLetter) <= 1;
-                return (
-                  <span
-                    key={`${letter}-${index}`}
-                    onMouseEnter={() => setHoveredLetter(index)}
-                    onMouseLeave={() => setHoveredLetter(null)}
-                    className="inline-block px-1"
-                  >
-                    <span
-                      className={`transition-all duration-200 ${isNearby ? "text-rose-200" : "text-rose-100"}`}
-                    >
-                      {isNearby && glitchChars[index] ? glitchChars[index] : letter}
-                    </span>
-                  </span>
-                );
-              })}
+          <div className="flex flex-col items-center gap-4">
+            <h1 className="font-display text-[3.8rem] font-black uppercase leading-[0.88] tracking-[-0.04em] text-rose-100 drop-shadow-[0_0_30px_rgba(244,63,94,0.3)] sm:text-[5.5rem]">
+              {SITE_TITLE}
             </h1>
-            <p className="text-sm uppercase tracking-[0.45em] text-rose-200/95 sm:text-base">
+            <p className="text-sm uppercase tracking-[0.45em] text-rose-200/90 sm:text-base">
               Roll Anime to Fight guide
             </p>
           </div>
-          <p className="max-w-2xl px-4 font-body text-sm text-white/70 sm:text-base">
+          <p className="max-w-2xl px-4 font-body text-base leading-7 text-white/75 sm:text-lg">
             {copy.subtitle}
           </p>
-          <div className="flex flex-wrap gap-3 pt-1">
+          <div className="flex flex-wrap justify-center gap-3 pt-1">
             {QUICK_LINKS[language].map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`rounded-xl px-5 py-3 font-body text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] ${
+                className={`rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 ${
                   i === 0
-                    ? "bg-red-600 text-white shadow-lg shadow-red-600/20"
-                    : "border border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+                    ? "bg-gradient-to-r from-orange-500 via-rose-500 to-fuchsia-500 text-white shadow-[0_20px_55px_-30px_rgba(251,146,60,0.55)] hover:-translate-y-0.5 hover:shadow-[0_24px_70px_-32px_rgba(251,146,60,0.65)]"
+                    : "border border-white/15 bg-white/10 text-white hover:border-white/20 hover:bg-white/15"
                 }`}
               >
                 {l.label}
@@ -211,7 +194,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="grid gap-5 rounded-[2rem] border border-white/10 bg-ink-surface/80 p-6 shadow-[0_24px_70px_-24px_rgba(0,0,0,0.82)] backdrop-blur-xl sm:p-8">
+      <section className="surface-card p-6 sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="font-display text-2xl font-black tracking-[0.06em] text-text">
