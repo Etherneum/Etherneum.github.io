@@ -84,29 +84,16 @@ export default function TutorialPage() {
   return (
     <div className="flex flex-col gap-10 transition-all duration-500 ease-out">
       <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-ink-surface via-ink-surface/95 to-white/5 p-6 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.85)] sm:p-8">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-text-faint">
-              {language === "es" ? "Centro de conocimiento" : "Knowledge hub"}
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
-              {copy.title}
-            </h1>
-            <p className="mt-3 font-body text-sm leading-7 text-text-dim sm:text-base">
-              {copy.subtitle}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              language === "es" ? "Guías rápidas" : "Quick guides",
-              language === "es" ? "Progreso claro" : "Clear progression",
-              language === "es" ? "Contenido útil" : "Useful content",
-            ].map((chip) => (
-              <span key={chip} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-text-dim">
-                {chip}
-              </span>
-            ))}
-          </div>
+        <div className="max-w-2xl">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-text-faint">
+            {language === "es" ? "Centro de conocimiento" : "Knowledge hub"}
+          </p>
+          <h1 className="mt-3 font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
+            {copy.title}
+          </h1>
+          <p className="mt-3 font-body text-sm leading-7 text-text-dim sm:text-base">
+            {copy.subtitle}
+          </p>
         </div>
       </section>
 

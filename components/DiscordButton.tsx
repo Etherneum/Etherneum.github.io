@@ -11,14 +11,11 @@ export default function DiscordButton() {
   return (
     <div className="fixed bottom-5 right-5 z-50 sm:bottom-6 sm:right-6">
       <div className="relative flex flex-col items-end gap-1">
-        <div className="rounded-full border border-[#5865F2]/40 bg-[#10131f]/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#c7d2fe] shadow-lg backdrop-blur">
-          Discord
-        </div>
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Open Discord links"
-          className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#5865F2] text-white shadow-[0_18px_40px_-20px_rgba(88,101,242,0.75)] transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0.5"
+          className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-[#5865F2] via-[#4752c4] to-[#7289da] text-white shadow-[0_18px_40px_-20px_rgba(88,101,242,0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 active:translate-y-0.5"
         >
           <span className="discord-pulse absolute inset-0 rounded-full" aria-hidden="true" />
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="relative z-10">

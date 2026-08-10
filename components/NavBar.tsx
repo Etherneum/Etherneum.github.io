@@ -93,12 +93,28 @@ export default function NavBar() {
               type="button"
               onClick={() => setSettingsOpen((v) => !v)}
               aria-label={settingsCopy.open}
-              className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-text shadow-[0_10px_24px_-12px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:border-rarity-god/40 hover:bg-white/10"
+              className="group flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-white/10 to-white/5 px-3 py-2 text-sm font-semibold text-text shadow-[0_12px_28px_-14px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:border-rarity-god/40 hover:bg-white/10"
             >
-              <span className="transition-transform duration-300 group-hover:rotate-90">⚙</span>
+              <span className="text-base transition-transform duration-300 group-hover:rotate-90">⚙</span>
+              <span className="hidden text-[11px] uppercase tracking-[0.24em] sm:inline">
+                {language === "es" ? "Ajustes" : "Settings"}
+              </span>
+              <span className="flex items-center gap-1">
+                {reduceMotion ? <span className="h-2 w-2 rounded-full bg-emerald-400" /> : <span className="h-2 w-2 rounded-full bg-white/30" />}
+                {lowGraphics ? <span className="h-2 w-2 rounded-full bg-sky-400" /> : <span className="h-2 w-2 rounded-full bg-white/30" />}
+                {compactMode ? <span className="h-2 w-2 rounded-full bg-amber-400" /> : <span className="h-2 w-2 rounded-full bg-white/30" />}
+              </span>
             </button>
             {settingsOpen && (
-              <div className="absolute right-0 mt-2 w-44 rounded-xl border border-ink-line/70 bg-ink-surface/95 p-3 shadow-xl shadow-black/30 animate-[fadeIn_0.2s_ease-out]">
+              <div className="absolute right-0 mt-2 w-56 rounded-[1.1rem] border border-white/10 bg-ink-surface/95 p-3 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-[fadeIn_0.2s_ease-out]">
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-text-faint">
+                    {language === "es" ? "Preferencias" : "Preferences"}
+                  </p>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] uppercase tracking-[0.2em] text-text-dim">
+                    {language === "es" ? "Rápido" : "Quick"}
+                  </span>
+                </div>
                 <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-text-faint">{settingsCopy.language}</p>
                 <div className="flex gap-2">
                   <button
@@ -116,43 +132,31 @@ export default function NavBar() {
                     ES
                   </button>
                 </div>
-                <div className="mt-3 space-y-3">
-                  <div>
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-text-faint">
-                      {settingsCopy.motion}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={toggleReduceMotion}
-                      className={`w-full rounded-lg px-2 py-1.5 text-sm transition ${reduceMotion ? "bg-rarity-god/20 text-white" : "bg-white/5 text-text-dim hover:text-text"}`}
-                    >
-                      {reduceMotion ? settingsCopy.motionOn : settingsCopy.motionOff}
-                    </button>
-                  </div>
-                  <div>
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-text-faint">
-                      {settingsCopy.graphics}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={toggleLowGraphics}
-                      className={`w-full rounded-lg px-2 py-1.5 text-sm transition ${lowGraphics ? "bg-rarity-god/20 text-white" : "bg-white/5 text-text-dim hover:text-text"}`}
-                    >
-                      {lowGraphics ? settingsCopy.graphicsOn : settingsCopy.graphicsOff}
-                    </button>
-                  </div>
-                  <div>
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-text-faint">
-                      {settingsCopy.compact}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={toggleCompactMode}
-                      className={`w-full rounded-lg px-2 py-1.5 text-sm transition ${compactMode ? "bg-rarity-god/20 text-white" : "bg-white/5 text-text-dim hover:text-text"}`}
-                    >
-                      {compactMode ? settingsCopy.compactOn : settingsCopy.compactOff}
-                    </button>
-                  </div>
+                <div className="mt-3 space-y-2">
+                  <button
+                    type="button"
+                    onClick={toggleReduceMotion}
+                    className={`flex w-full items-center justify-between rounded-xl px-2.5 py-2 text-sm transition ${reduceMotion ? "bg-rarity-god/20 text-white" : "bg-white/5 text-text-dim hover:text-text"}`}
+                  >
+                    <span>{settingsCopy.motion}</span>
+                    <span className="text-[11px] uppercase tracking-[0.2em]">{reduceMotion ? settingsCopy.motionOn : settingsCopy.motionOff}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={toggleLowGraphics}
+                    className={`flex w-full items-center justify-between rounded-xl px-2.5 py-2 text-sm transition ${lowGraphics ? "bg-rarity-god/20 text-white" : "bg-white/5 text-text-dim hover:text-text"}`}
+                  >
+                    <span>{settingsCopy.graphics}</span>
+                    <span className="text-[11px] uppercase tracking-[0.2em]">{lowGraphics ? settingsCopy.graphicsOn : settingsCopy.graphicsOff}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={toggleCompactMode}
+                    className={`flex w-full items-center justify-between rounded-xl px-2.5 py-2 text-sm transition ${compactMode ? "bg-rarity-god/20 text-white" : "bg-white/5 text-text-dim hover:text-text"}`}
+                  >
+                    <span>{settingsCopy.compact}</span>
+                    <span className="text-[11px] uppercase tracking-[0.2em]">{compactMode ? settingsCopy.compactOn : settingsCopy.compactOff}</span>
+                  </button>
                 </div>
               </div>
             )}
