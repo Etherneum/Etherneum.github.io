@@ -24,49 +24,51 @@ const TABS = {
 
 function TierRowShelf({ row, unitMap }: { row: TierRow; unitMap: Record<string, { image?: string }>; }) {
   return (
-    <div className="flex flex-col gap-3 border-b border-ink-line/70 py-5 sm:flex-row sm:gap-6">
-      <div
-        className="flex shrink-0 items-center gap-3 sm:w-40 sm:flex-col sm:items-start sm:gap-1"
-        style={{ color: row.color }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="h-8 w-1.5 rounded-full" style={{ backgroundColor: row.color }} />
-          <span className="font-display text-3xl font-black tracking-[0.06em]">{row.label}</span>
+    <div className="rounded-[1.2rem] border border-white/10 bg-gradient-to-br from-white/5 via-white/3 to-transparent p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:p-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+        <div
+          className="flex shrink-0 items-center gap-3 sm:w-44 sm:flex-col sm:items-start sm:gap-2"
+          style={{ color: row.color }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="h-8 w-1.5 rounded-full" style={{ backgroundColor: row.color }} />
+            <span className="font-display text-2xl font-black tracking-[0.06em] sm:text-3xl">{row.label}</span>
+          </div>
+          {row.sublabel && (
+            <p className="font-body text-xs text-text-faint sm:pl-3.5">{row.sublabel}</p>
+          )}
         </div>
-        {row.sublabel && (
-          <p className="font-body text-xs text-text-faint sm:pl-3.5">{row.sublabel}</p>
-        )}
-      </div>
-      <div className="flex flex-1 flex-wrap gap-2">
-        {row.units.map((name) => {
-          const unit = getUnitByName(name);
-          const meta = unit ? RARITY_META[unit.rarity] : null;
-          const id = unit ? unit.id : name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-          const image = unitMap[id]?.image;
-          return (
-            <span
-              key={name}
-              className={`inline-flex items-center gap-2 rounded-lg border px-2.5 py-1.5 font-body text-xs font-medium sm:text-sm ${
-                meta ? `${meta.border} ${meta.bg} ${meta.text}` : "border-ink-line text-text-dim"
-              }`}
-            >
-              {image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <div className="h-14 w-14 overflow-hidden rounded-md">
-                  <img
-                    src={image}
-                    alt={name}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              ) : (
-                <span className="h-14 w-14 rounded-md border border-current/20 bg-black/10" />
-              )}
-              <span>{name}</span>
-            </span>
-          );
-        })}
+        <div className="flex flex-1 flex-wrap gap-2">
+          {row.units.map((name) => {
+            const unit = getUnitByName(name);
+            const meta = unit ? RARITY_META[unit.rarity] : null;
+            const id = unit ? unit.id : name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+            const image = unitMap[id]?.image;
+            return (
+              <div
+                key={name}
+                className={`flex items-center gap-2 rounded-[0.95rem] border px-2.5 py-2 font-body text-xs font-medium shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 sm:text-sm ${
+                  meta ? `${meta.border} ${meta.bg} ${meta.text}` : "border-white/10 bg-white/5 text-text-dim"
+                }`}
+              >
+                {image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <div className="h-12 w-12 overflow-hidden rounded-lg border border-black/20 bg-black/10 sm:h-14 sm:w-14">
+                    <img
+                      src={image}
+                      alt={name}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : (
+                  <span className="h-12 w-12 rounded-lg border border-current/20 bg-black/10 sm:h-14 sm:w-14" />
+                )}
+                <span className="max-w-[8rem] truncate sm:max-w-none">{name}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -149,29 +151,58 @@ export default function TierListPage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
-          {language === "es" ? "Lista de niveles" : "Tier List"}
-        </h1>
-        <div className="inline-flex gap-1 rounded-full border border-ink-line bg-ink-surface p-1">
-          {tabs.map((t) => (
-            <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
-              className={`flex-1 rounded-full px-4 py-2 font-body text-sm font-semibold transition-colors duration-300 sm:flex-initial ${
-                tab === t.key
-                  ? "bg-rarity-legendary text-ink"
-                  : "text-text-dim hover:text-text"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
+    <div className="flex flex-col gap-6">
+      <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-ink-surface via-ink-surface to-ink-surface2 p-5 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.85)] sm:p-6">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.25em] text-text-faint">
+              {language === "es" ? "Comparación visual" : "Visual roster guide"}
+            </p>
+            <h1 className="font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
+              {language === "es" ? "Lista de niveles" : "Tier List"}
+            </h1>
+            <p className="mt-3 text-sm leading-6 text-text-faint sm:text-base">
+              {language === "es"
+                ? "Explora la lista con una vista más limpia, visual y fácil de leer para cada categoría."
+                : "Browse the rankings with a cleaner, more visual layout that makes each category easier to scan."}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              language === "es" ? "Clasificación visual" : "Visual ranking",
+              language === "es" ? "Rostros destacados" : "Featured fighters",
+              language === "es" ? "Vista rápida" : "Quick scan",
+            ].map((chip) => (
+              <span key={chip} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-text-dim">
+                {chip}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+          <div className="inline-flex gap-1 rounded-full border border-white/10 bg-white/5 p-1">
+            {tabs.map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setTab(t.key)}
+                className={`flex-1 rounded-full px-4 py-2 font-body text-sm font-semibold transition-all duration-300 sm:flex-initial ${
+                  tab === t.key
+                    ? "bg-white/15 text-white shadow-inner"
+                    : "text-text-dim hover:bg-white/10 hover:text-text"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <div className="text-sm text-text-faint">
+            {rows.length} {language === "es" ? "filas" : "rows"}
+          </div>
         </div>
       </div>
 
-      <div key={tab} className="fade-in rounded-2xl border border-ink-line bg-ink-surface px-4 sm:px-6">
+      <div key={tab} className="fade-in space-y-3 rounded-[1.6rem] border border-white/10 bg-ink-surface/70 p-3 sm:p-4">
         {rows.map((row) => (
           <TierRowShelf key={row.label} row={row} unitMap={unitMap} />
         ))}
