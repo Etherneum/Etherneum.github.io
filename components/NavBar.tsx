@@ -64,7 +64,7 @@ export default function NavBar() {
     <header className="sticky top-0 z-40 border-b border-ink-line/70 bg-ink/95 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
-          <span className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-text shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)]">
+          <span className="text-sm font-semibold uppercase tracking-[0.3em] text-text">
             Etherneum
           </span>
         </Link>
