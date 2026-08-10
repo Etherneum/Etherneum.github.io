@@ -50,6 +50,7 @@ const LIMITED_UNITS: UnitDetails[] = [
   u("Aldedo", "Limited", 298000),
   u("Saitomo Serious", "Limited", 274000),
   u("Bloodtear", "Limited", 261000),
+  u("Yudero", "Limited"),
   u("Takamoso", "Limited", 179000),
   u("Entomancer", "Limited", 165000),
   u("Genes", "Limited", 162000),
@@ -66,9 +67,12 @@ const LIMITED_UNITS: UnitDetails[] = [
 ];
 
 const GOD_UNITS: UnitDetails[] = [
-  u("Sakuna (Heian)", "God",500000),
+  u("Sakuna Heian", "God",500000),
   u("Goji Shinjuku", "God", 190000),
   u("Ais", "God", 225000),
+  u("Hashyrama", "God"),
+  u("Madura", "God"),
+  u("Madura Six Realms", "God"),
   u("Wise", "God", 130000),
   u("Yoichi", "God", 110000),
   u("Aisen Divine", "God", 150000),
@@ -85,6 +89,10 @@ const GOD_UNITS: UnitDetails[] = [
 const SECRET_UNITS: UnitDetails[] = [
   u("Kenie", "Secret", 55000),
   u("Ulquiopta", "Secret", 30000),
+  u("Megullan", "Secret"),
+  u("Susuko", "Secret"),
+  u("Maru", "Secret"),
+  u("Noruto Six Realm", "Secret"),
   u("Yutta", "Secret", 37000),
   u("Brakura", "Secret", 31000),
   u("Yuwah", "Secret", 30000),
@@ -101,6 +109,8 @@ const SECRET_UNITS: UnitDetails[] = [
 const MYTHIC_UNITS: UnitDetails[] = [
   u("Kiwusuke", "Mythic", 22000),
   u("Shimo Haya", "Mythic", 18000),
+  u("Kebashi", "Mythic"),
+  u("Tomi", "Mythic"),
   u("Joti", "Mythic", 6000),
   u("Brocolli", "Mythic", 5000),
   u("Rengundam", "Mythic", 4000),
@@ -129,6 +139,7 @@ const LEGENDARY_UNITS: UnitDetails[] = [
 const RARE_UNITS: UnitDetails[] = [
   u("Sukora", "Rare", 10),
   u("Mobi", "Rare", 10),
+  u("Soji", "Rare", 10),
   u("Goke", "Rare", 10),
   u("Janwoo", "Rare", 10),
   u("Mika", "Rare", 10),
@@ -136,6 +147,7 @@ const RARE_UNITS: UnitDetails[] = [
 
 const EPIC_UNITS: UnitDetails[] = [
   u("Got", "Epic", 16000),
+  u("Shikamura", "Epic"),
   u("Picurro", "Epic", 15000),
   u("Bon", "Epic", 14000),
   u("Manji", "Epic", 13000),
@@ -152,6 +164,102 @@ const COMMON_UNITS: UnitDetails[] = [
 ];
 
 const KNOWN_DETAIL_OVERRIDES: Record<string, Partial<UnitDetails>> = {
+  hashyrama: {
+    stats: {
+      damage: 75000,
+      defense: 1.5,
+      health: 75000,
+      speed: 1
+    }
+  },
+  kebashi: {
+    stats: {
+      damage: 16000,
+      defense: 1.33,
+      health: 15000,
+      speed: 3
+    }
+  },
+  madura: {
+    stats: {
+      damage: 75000,
+      defense: 1.25,
+      health: 75000,
+      speed: 1
+    }
+  },
+  "madura-six-realms": {
+    stats: {
+      damage: 1837500,
+      defense: 2,
+      health: 290000,
+      speed: 1
+    }
+  },
+  megullan: {
+    stats: {
+      damage: 20000,
+      defense: 1.33,
+      health: 17500,
+      speed: 3
+    }
+  },
+  susuko: {
+    stats: {
+      damage: 35000,
+      defense: 1.33,
+      health: 30000,
+      speed: 1
+    }
+  },
+  maru: {
+    stats: {
+      damage: 15000,
+      defense: 1.15,
+      health: 20000,
+      speed: 2
+    }
+  },
+  "noruto-six-realm": {
+    stats: {
+      damage: 150000,
+      defense: 2,
+      health: 45000,
+      speed: 1
+    }
+  },
+  shikamura: {
+    stats: {
+      damage: 400,
+      defense: 1.35,
+      health: 5000,
+      speed: 2
+    }
+  },
+  soji: {
+    stats: {
+      damage: 85,
+      defense: 1.45,
+      health: 1500,
+      speed: 1
+    }
+  },
+  tomi: {
+    stats: {
+      damage: 8000,
+      defense: 1.5,
+      health: 25000,
+      speed: 1.5
+    }
+  },
+  yudero: {
+    stats: {
+      damage: 25000,
+      defense: 1.5,
+      health: 85000,
+      speed: 4
+    }
+  },
   deyo: {
   stats: {
     damage: 420,

@@ -156,18 +156,18 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-16">
-      <section className="relative isolate flex min-h-screen w-[100vw] left-[50%] translate-x-[-50%] flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(235,77,102,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.14),transparent_26%),linear-gradient(180deg,#07080e 0%,#101826 100%)] pb-8 shadow-none">
+      <section className="relative isolate flex min-h-screen w-[100vw] left-[50%] translate-x-[-50%] flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(235,77,102,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.16),transparent_28%),linear-gradient(180deg,#080a11 0%,#11172a 100%)] pb-8 shadow-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,113,113,0.16),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_35%)]" />
         <div className="absolute inset-y-28 left-6 h-28 w-28 rounded-full border border-red-400/20 blur-3xl" />
         <div className="absolute right-8 top-20 h-24 w-24 rounded-full border border-fuchsia-400/15 blur-3xl" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgba(255,255,255,0.05)_55%)]" />
         <div className="relative z-10 flex w-full flex-col items-center justify-center gap-6 text-center">
-          <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200">
+          <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)]">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
             {copy.badge}
           </div>
           <div className="group flex flex-col items-center gap-4">
-            <h1 className="font-display text-[5.5rem] font-black uppercase leading-[0.88] tracking-[-0.06em] text-rose-100 drop-shadow-[0_0_30px_rgba(244,63,94,0.45)] sm:text-[8.5rem]">
+            <h1 className="font-display text-[5.5rem] font-black uppercase leading-[0.88] tracking-[-0.06em] text-rose-100 drop-shadow-[0_0_30px_rgba(244,63,94,0.35)] sm:text-[8.5rem]">
               {SITE_TITLE.split("").map((letter, index) => {
                 const isNearby = hoveredLetter !== null && Math.abs(index - hoveredLetter) <= 1;
                 return (
@@ -211,7 +211,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="grid gap-5 rounded-[2rem] border border-white/10 bg-ink-surface/80 p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)] sm:p-8">
+      <section className="grid gap-5 rounded-[2rem] border border-white/10 bg-ink-surface/80 p-6 shadow-[0_24px_70px_-24px_rgba(0,0,0,0.82)] backdrop-blur-xl sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="font-display text-2xl font-black tracking-[0.06em] text-text">
@@ -231,7 +231,7 @@ export default function HomePage() {
 
         <div className="grid gap-3 sm:grid-cols-3">
           {copy.features.map((feature) => (
-            <div key={feature.title} className="rounded-3xl border border-ink-line/70 bg-ink p-5">
+            <div key={feature.title} className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/8 to-white/3 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
               <h3 className="font-display text-lg font-black tracking-[0.04em] text-text">
                 {feature.title}
               </h3>
