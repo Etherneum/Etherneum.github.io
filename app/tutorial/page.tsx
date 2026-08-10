@@ -82,15 +82,33 @@ export default function TutorialPage() {
   const copy = GUIDE_COPY[language];
 
   return (
-    <div className="flex flex-col gap-14 transition-all duration-500 ease-out">
-      <div className="rounded-2xl border border-ink-line/70 bg-gradient-to-br from-ink-surface via-ink-surface/90 to-ink-surface/70 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset]">
-        <h1 className="font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
-          {copy.title}
-        </h1>
-        <p className="mt-3 max-w-2xl font-body text-sm leading-6 text-text-dim">
-          {copy.subtitle}
-        </p>
-      </div>
+    <div className="flex flex-col gap-10 transition-all duration-500 ease-out">
+      <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-ink-surface via-ink-surface/95 to-white/5 p-6 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.85)] sm:p-8">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-text-faint">
+              {language === "es" ? "Centro de conocimiento" : "Knowledge hub"}
+            </p>
+            <h1 className="mt-3 font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
+              {copy.title}
+            </h1>
+            <p className="mt-3 font-body text-sm leading-7 text-text-dim sm:text-base">
+              {copy.subtitle}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              language === "es" ? "Guías rápidas" : "Quick guides",
+              language === "es" ? "Progreso claro" : "Clear progression",
+              language === "es" ? "Contenido útil" : "Useful content",
+            ].map((chip) => (
+              <span key={chip} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-text-dim">
+                {chip}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section>
         <SectionHeading title={copy.categoryTitle} />
@@ -99,13 +117,13 @@ export default function TutorialPage() {
             <Link
               key={category.href}
               href={category.href}
-              className="group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[1.8rem] border border-red-500/10 bg-gradient-to-br from-ink-surface via-ink-surface/95 to-red-500/10 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_16px_42px_rgba(0,0,0,0.28)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-red-400/20"
+              className="group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[1.8rem] border border-white/10 bg-gradient-to-br from-white/6 via-white/3 to-transparent p-6 shadow-[0_16px_42px_rgba(0,0,0,0.28)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_40%)]" />
               <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full border border-white/10 bg-white/5 blur-2xl" />
               <div className="absolute -bottom-10 -left-10 h-28 w-28 rounded-full border border-white/10 bg-black/10 blur-3xl" />
               <div className="relative z-10">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
                   {category.symbol}
                 </div>
                 <h3 className="font-display text-2xl font-black tracking-[0.05em] text-text">
@@ -114,7 +132,7 @@ export default function TutorialPage() {
                 <p className="mt-3 text-sm leading-6 text-text-dim">{category.description}</p>
               </div>
               <div className="relative z-10 mt-6 flex items-center justify-between gap-3">
-                <span className="text-sm font-semibold tracking-[0.04em] text-red-300/95">Open section →</span>
+                <span className="text-sm font-semibold tracking-[0.04em] text-red-300/95">{language === "es" ? "Abrir sección →" : "Open section →"}</span>
                 <span className="text-xs uppercase tracking-[0.3em] text-text-faint">Guide</span>
               </div>
             </Link>
@@ -129,7 +147,7 @@ export default function TutorialPage() {
             <Link
               key={item.href}
               href={item.href}
-              className="group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[1.8rem] border border-red-500/10 bg-gradient-to-br from-ink-surface via-ink-surface/95 to-red-500/10 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_16px_42px_rgba(0,0,0,0.28)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-red-400/20 hover:shadow-[0_18px_48px_rgba(255,255,255,0.08)]"
+              className="group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-[1.8rem] border border-white/10 bg-gradient-to-br from-white/6 via-white/3 to-transparent p-6 shadow-[0_16px_42px_rgba(0,0,0,0.28)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_18px_48px_rgba(255,255,255,0.08)]"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_40%)]" />
               <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full border border-white/10 bg-white/5 blur-2xl" />
@@ -139,7 +157,7 @@ export default function TutorialPage() {
               </div>
               <div className="relative z-10">
                 <div className="mb-4 flex items-center justify-between gap-3">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-2xl text-red-300 shadow-[0_10px_25px_rgba(239,68,68,0.16)]">
                     {item.symbol}
                   </div>
                   {item.tag ? (

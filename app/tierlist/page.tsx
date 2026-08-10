@@ -167,18 +167,7 @@ export default function TierListPage() {
                 : "Browse the rankings with a cleaner, more visual layout that makes each category easier to scan."}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              language === "es" ? "Clasificación visual" : "Visual ranking",
-              language === "es" ? "Rostros destacados" : "Featured fighters",
-              language === "es" ? "Vista rápida" : "Quick scan",
-            ].map((chip) => (
-              <span key={chip} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-text-dim">
-                {chip}
-              </span>
-            ))}
           </div>
-        </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
           <div className="inline-flex gap-1 rounded-full border border-white/10 bg-white/5 p-1">
