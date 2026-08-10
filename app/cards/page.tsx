@@ -306,16 +306,28 @@ export default function CardsPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl">
-          {copy.title}
-        </h1>
-        <p className="mt-1 font-mono text-xs uppercase tracking-widest text-text-faint">
-          {copy.subtitle(units.length)}
-        </p>
-      </div>
+      <section className="surface-card overflow-hidden px-6 py-8 sm:px-8 sm:py-10">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-rose-400/20 bg-rose-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-rose-200">
+              <span className="h-2 w-2 rounded-full bg-rose-400" />
+              Unit archive
+            </div>
+            <h1 className="mt-4 font-display text-4xl font-black tracking-[0.08em] text-text sm:text-5xl lg:text-6xl">
+              {copy.title}
+            </h1>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-text-faint sm:text-base">
+              Browse the roster with a sharper lens—filter by rarity, value, and quality tier to discover the strongest picks at a glance.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-text-dim">
+            <div className="font-mono text-[10px] uppercase tracking-[0.32em] text-text-faint">Indexed units</div>
+            <div className="mt-1 text-2xl font-semibold text-white">{copy.subtitle(units.length)}</div>
+          </div>
+        </div>
+      </section>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-white/8 to-white/3 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:p-5">
         <div className="flex flex-col gap-2 p-0 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative w-full max-w-sm">
             <input
@@ -323,7 +335,7 @@ export default function CardsPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={copy.searchPlaceholder}
-              className="w-full rounded-lg border border-ink-line bg-ink-surface px-4 py-2.5 pr-20 font-body text-sm text-text placeholder:text-text-faint focus:border-rarity-legendary"
+              className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 pr-20 font-body text-sm text-text shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] placeholder:text-text-faint focus:border-rose-400/40"
             />
             {query && (
               <button
@@ -425,7 +437,7 @@ export default function CardsPage() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {filtered.map((unit) => (
             <CardTile key={unit.id} unit={unit} onOpen={(u) => setSelected(u)} />
           ))}
