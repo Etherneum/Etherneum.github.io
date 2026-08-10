@@ -65,7 +65,7 @@ export default function CardTile({ unit, onOpen, compact = false }: { unit: Unit
 
   const cardClasses = `relative flex ${compact ? "h-full w-full" : "flex-col"} overflow-hidden rounded-[1.35rem] border bg-gradient-to-b from-ink-surface/95 via-ink-surface/90 to-ink-surface2/95 shadow-[0_16px_40px_-18px_rgba(0,0,0,0.8)] transition-all duration-250 ease-out hover:-translate-y-1 hover:shadow-[0_24px_50px_-18px_rgba(0,0,0,0.85)] ${meta.border} cursor-pointer ${isPressed ? "scale-[0.97] -translate-y-0.5 shadow-[0_12px_24px_-14px_rgba(0,0,0,0.7)]" : ""}`;
   const innerCardClasses = `relative flex ${compact ? "h-full w-full" : "flex-col"} overflow-hidden rounded-2xl bg-transparent`;
-  const imageAreaClasses = compact ? "relative flex aspect-[4/5] items-center justify-center overflow-hidden" : "relative flex h-30 items-center justify-center overflow-hidden";
+  const imageAreaClasses = compact ? "relative flex aspect-[4/5] items-center justify-center overflow-hidden" : "relative flex h-28 items-center justify-center overflow-hidden";
   const bodyClasses = compact ? "flex flex-1 flex-col justify-end gap-1 p-2.5" : "flex flex-1 flex-col gap-1.5 p-2.5";
   const titleClasses = compact ? "truncate font-body text-[10px] font-semibold text-text sm:text-xs" : "truncate font-body text-xs font-semibold text-text sm:text-sm";
   const badgeClasses = compact ? "w-fit rounded-full border px-2 py-0.5 font-mono text-[8px] font-bold uppercase tracking-wider" : "w-fit rounded-full border px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider";
