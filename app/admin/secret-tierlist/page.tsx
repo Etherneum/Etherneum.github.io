@@ -99,7 +99,7 @@ export default function AdminTierlistPage() {
           damage: 'DAMAGE_DEALERS_TIER_LIST',
           support: 'SUPPORT_TIER_LIST',
         };
-        if (stored && map[stored] && (t ?? {})[map[stored]]) {
+        if (stored && map[stored] && ((t as any) ?? {})[map[stored]]) {
           setSelectedKey(map[stored]);
         }
       } catch (e) {
@@ -134,7 +134,7 @@ export default function AdminTierlistPage() {
             damage: 'DAMAGE_DEALERS_TIER_LIST',
             support: 'SUPPORT_TIER_LIST',
           };
-          if (stored && map[stored] && (t ?? {})[map[stored]]) {
+          if (stored && map[stored] && ((t as any) ?? {})[map[stored]]) {
             setSelectedKey(map[stored]);
           }
         } catch (e2) {
