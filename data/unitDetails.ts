@@ -63,6 +63,8 @@ const LIMITED_UNITS: UnitDetails[] = [
   u("Joozou", "Limited", 260000),
   u("Lilim", "Limited", 270000),
   u("Yuwi", "Limited"),
+  u("Makina", "Limited"),
+  u("Kaneko", "Limited"),
   u("Tanjuro", "Epic", 117000),
 ];
 
@@ -72,7 +74,9 @@ const GOD_UNITS: UnitDetails[] = [
   u("Ais", "God", 225000),
   u("Hashyrama", "God"),
   u("Madura", "God"),
-  u("Madura Six Realms", "God"),
+  u("Madura Six Realm", "God"),
+  u("Boris", "God"),
+  u("Flamingo", "God"),
   u("Wise", "God", 130000),
   u("Yoichi", "God", 110000),
   u("Aisen Divine", "God", 150000),
@@ -92,7 +96,7 @@ const SECRET_UNITS: UnitDetails[] = [
   u("Megullan", "Secret"),
   u("Susuko", "Secret"),
   u("Maru", "Secret"),
-  u("Noruto Six Realm", "Secret"),
+  u("Norotu Six Realms", "Secret"),
   u("Yutta", "Secret", 37000),
   u("Brakura", "Secret", 31000),
   u("Yuwah", "Secret", 30000),
@@ -232,7 +236,7 @@ const KNOWN_DETAIL_OVERRIDES: Record<string, Partial<UnitDetails>> = {
       speed: 2
     }
   },
-  "noruto-six-realm": {
+  "norotu-six-realms": {
     stats: {
       damage: 150000,
       defense: 2,
