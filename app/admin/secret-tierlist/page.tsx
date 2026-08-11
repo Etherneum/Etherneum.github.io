@@ -54,7 +54,17 @@ export default function AdminTierlistPage() {
         setMessage("Incorrect password");
       }
     } catch (e) {
-      setMessage("Error checking password");
+      // If API is unavailable (static hosting), fall back to a client-side
+      // password check. This is insecure but allows a hidden admin page on
+      // GitHub Pages. Default value matches server default.
+      const FALLBACK = "YBXII";
+      if (password === FALLBACK) {
+        setAuthed(true);
+        setMessage("");
+        await loadData();
+      } else {
+        setMessage("Error checking password");
+      }
     }
   }
 
@@ -98,7 +108,41 @@ export default function AdminTierlistPage() {
       setAvailableUnits(u ?? []);
       setMessage("");
     } catch (e) {
-      setMessage("Failed to load data");
+      // If API routes are unavailable (static hosting like GitHub Pages),
+      // fall back to importing the data modules directly so the admin page
+      // still works as a client-only editor.
+      try {
+        // dynamic import so bundler includes data for static builds
+        const tierMod = await import("@/data/tierlists");
+        const unitsMod = await import("@/data/units");
+        const t = {
+          AUTO_TIER_CATEGORIES: (tierMod as any).AUTO_TIER_CATEGORIES,
+          TANKS_TIER_LIST: (tierMod as any).TANKS_TIER_LIST,
+          DAMAGE_DEALERS_TIER_LIST: (tierMod as any).DAMAGE_DEALERS_TIER_LIST,
+          SUPPORT_TIER_LIST: (tierMod as any).SUPPORT_TIER_LIST,
+          QUALITY_TIER_LIST: (tierMod as any).QUALITY_TIER_LIST,
+        };
+        const u = (unitsMod as any).UNITS.map((it: any) => it.name);
+        setAllLists(t ?? {});
+        setAvailableUnits(u ?? []);
+        setMessage("");
+        // Try to auto-select the same tier list the public page is using.
+        try {
+          const stored = localStorage.getItem('tierlistTab');
+          const map: Record<string, string> = {
+            tanks: 'TANKS_TIER_LIST',
+            damage: 'DAMAGE_DEALERS_TIER_LIST',
+            support: 'SUPPORT_TIER_LIST',
+          };
+          if (stored && map[stored] && (t ?? {})[map[stored]]) {
+            setSelectedKey(map[stored]);
+          }
+        } catch (e2) {
+          // ignore
+        }
+      } catch (err) {
+        setMessage("Failed to load data");
+      }
     }
   }
 

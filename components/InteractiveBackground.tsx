@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
 type Ripple = {
@@ -23,9 +23,34 @@ export default function InteractiveBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { reduceMotion, lowGraphics } = useLanguage();
 
+  const [shouldRender, setShouldRender] = useState(true);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    // Heuristic: skip the background on low-power devices or small screens
+    try {
+      // @ts-ignore
+      const deviceMemory = (navigator as any).deviceMemory || 0;
+      const hw = (navigator as any).hardwareConcurrency || 4;
+      if (deviceMemory && deviceMemory < 4) {
+        setShouldRender(false);
+        return;
+      }
+      if (hw && hw < 3) {
+        setShouldRender(false);
+        return;
+      }
+      if (window.innerWidth < 900) {
+        setShouldRender(false);
+        return;
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    if (!shouldRender) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -50,7 +75,8 @@ export default function InteractiveBackground() {
     });
 
     const syncParticleCount = () => {
-      const targetCount = Math.min(120, Math.max(70, Math.floor((width / 18) * zoom)));
+      // lower particle density for better performance
+      const targetCount = Math.min(60, Math.max(20, Math.floor((width / 30) * zoom)));
       while (particles.length < targetCount) particles.push(createParticle());
       while (particles.length > targetCount) particles.pop();
     };
@@ -173,19 +199,22 @@ export default function InteractiveBackground() {
         ctx.fill();
       }
 
-      for (let i = 0; i < scaledParticles.length; i++) {
-        for (let j = i + 1; j < scaledParticles.length; j++) {
-          const a = scaledParticles[i];
-          const b = scaledParticles[j];
-          const dist = Math.hypot(a.sx - b.sx, a.sy - b.sy);
-          if (dist < 95 * zoom) {
-            const alpha = 1 - dist / (95 * zoom);
-            ctx.beginPath();
-            ctx.moveTo(a.sx, a.sy);
-            ctx.lineTo(b.sx, b.sy);
-            ctx.strokeStyle = `rgba(248,113,113,${alpha * 0.1})`;
-            ctx.lineWidth = 0.75;
-            ctx.stroke();
+      // avoid expensive O(n^2) connecting lines on large particle counts
+      if (scaledParticles.length <= 48) {
+        for (let i = 0; i < scaledParticles.length; i++) {
+          for (let j = i + 1; j < scaledParticles.length; j++) {
+            const a = scaledParticles[i];
+            const b = scaledParticles[j];
+            const dist = Math.hypot(a.sx - b.sx, a.sy - b.sy);
+            if (dist < 95 * zoom) {
+              const alpha = 1 - dist / (95 * zoom);
+              ctx.beginPath();
+              ctx.moveTo(a.sx, a.sy);
+              ctx.lineTo(b.sx, b.sy);
+              ctx.strokeStyle = `rgba(248,113,113,${alpha * 0.1})`;
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
+            }
           }
         }
       }
@@ -212,8 +241,11 @@ export default function InteractiveBackground() {
         }
       }
 
-      if (!reduceMotion) {
+      if (!reduceMotion && document.visibilityState === "visible") {
         rafId = requestAnimationFrame(draw);
+      } else {
+        // poll slowly when not visible
+        rafId = window.setTimeout(draw, 1000) as unknown as number;
       }
     };
 
