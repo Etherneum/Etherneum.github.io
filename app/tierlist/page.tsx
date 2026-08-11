@@ -150,6 +150,26 @@ export default function TierListPage() {
       .catch(() => {});
   }, []);
 
+  // Persist selected tab so admin UI can default to the same list
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('tierlistTab');
+      if (stored && (['tanks', 'damage', 'support'] as const).includes(stored as any)) {
+        setTab(stored as any);
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('tierlistTab', tab);
+    } catch (e) {
+      // ignore
+    }
+  }, [tab]);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="rounded-[1.6rem] border border-white/10 bg-gradient-to-br from-ink-surface via-ink-surface to-ink-surface2 p-5 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.85)] sm:p-6">

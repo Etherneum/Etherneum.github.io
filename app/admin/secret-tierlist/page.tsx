@@ -81,6 +81,20 @@ export default function AdminTierlistPage() {
         // ignore missing cards file
       }
       setAllLists(t ?? {});
+      // Try to auto-select the same tier list the public page is using.
+      try {
+        const stored = localStorage.getItem('tierlistTab');
+        const map: Record<string, string> = {
+          tanks: 'TANKS_TIER_LIST',
+          damage: 'DAMAGE_DEALERS_TIER_LIST',
+          support: 'SUPPORT_TIER_LIST',
+        };
+        if (stored && map[stored] && (t ?? {})[map[stored]]) {
+          setSelectedKey(map[stored]);
+        }
+      } catch (e) {
+        // ignore
+      }
       setAvailableUnits(u ?? []);
       setMessage("");
     } catch (e) {
@@ -134,6 +148,17 @@ export default function AdminTierlistPage() {
       return prevArr.map((r, idx) => (idx === rowIndex ? { ...r, units: [] } : r));
     });
     setMessage(`Cleared ${rows[rowIndex]?.label ?? "row"}`);
+  }
+
+  function removeUnitFromRow(rowIndex: number, unitName: string) {
+    setRows((prev) => {
+      const prevArr = Array.isArray(prev) ? prev : [];
+      const copy = prevArr.map((r) => ({ ...r, units: Array.isArray(r.units) ? [...r.units] : [] }));
+      const idx = copy[rowIndex]?.units.indexOf(unitName);
+      if (idx != null && idx !== -1) copy[rowIndex].units.splice(idx, 1);
+      return copy;
+    });
+    setMessage(`Removed ${unitName}`);
   }
 
   function searchOptions(rowIndex: number) {
@@ -246,7 +271,7 @@ export default function AdminTierlistPage() {
                           Close
                         </button>
                       </div>
-                      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                      <div className="mt-3 grid gap-2 sm:grid-cols-2 max-h-64 overflow-y-auto">
                         {searchOptions(idx).map((name) => {
                           const image = imageMap[name] || imageMap[name.toLowerCase()];
                           return (
@@ -254,15 +279,31 @@ export default function AdminTierlistPage() {
                               key={name}
                               type="button"
                               onClick={() => addUnitToRow(idx, name)}
-                              className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-left text-sm text-text transition hover:bg-white/10"
+                              className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-left text-sm text-text transition hover:bg-white/10 justify-between"
                             >
-                              {image ? (
-                                // eslint-disable-next-line @next/next/no-img-element
-                                <img src={image} alt={name} className="h-10 w-10 rounded-lg object-cover" loading="lazy" />
-                              ) : (
-                                <span className="h-10 w-10 rounded-lg bg-white/10" />
-                              )}
-                              <span className="truncate">{name}</span>
+                                <div className="flex items-center gap-3">
+                                  {image ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img src={image} alt={name} className="h-10 w-10 rounded-lg object-cover" loading="lazy" />
+                                  ) : (
+                                    <span className="h-10 w-10 rounded-lg bg-white/10" />
+                                  )}
+                                  <span className="truncate max-w-[12rem]">{name}</span>
+                                </div>
+                                <div className="ml-3 flex-shrink-0 text-right text-xs text-text-faint">
+                                  {(() => {
+                                    const unit = getUnitByName(name);
+                                    const hp = unit?.stats?.health;
+                                    const dmg = unit?.stats?.damage;
+                                    const fmt = (n: number | undefined) => (n == null ? "—" : n.toLocaleString());
+                                    return (
+                                      <div className="flex flex-col">
+                                        <span>HP: {fmt(hp as any)}</span>
+                                        <span>DMG: {fmt(dmg as any)}</span>
+                                      </div>
+                                    );
+                                  })()}
+                                </div>
                             </button>
                           );
                         })}
@@ -281,19 +322,31 @@ export default function AdminTierlistPage() {
                           key={name}
                           draggable
                           onDragStart={(e) => onDragStart(e, name, selectedKey, idx)}
-                          className={`w-full flex items-center gap-2 rounded-[0.95rem] border px-2.5 py-2 font-body text-xs font-medium shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 sm:text-sm ${
+                          className={`w-full flex items-center justify-between gap-2 rounded-[0.95rem] border px-2.5 py-2 font-body text-xs font-medium shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 sm:text-sm ${
                             meta ? `${meta.border} ${meta.bg} ${meta.text}` : "border-white/10 bg-white/5 text-text-dim"
                           }`}
                         >
-                          {image ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <div className="h-12 w-12 overflow-hidden rounded-lg border border-black/20 bg-black/10 sm:h-14 sm:w-14">
-                              <img src={image} alt={name} className="h-full w-full object-cover" loading="lazy" />
-                            </div>
-                          ) : (
-                            <span className="h-12 w-12 rounded-lg border border-current/20 bg-black/10 sm:h-14 sm:w-14" />
-                          )}
-                          <span className="truncate">{name}</span>
+                          <div className="flex items-center gap-2">
+                            {image ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <div className="h-12 w-12 overflow-hidden rounded-lg border border-black/20 bg-black/10 sm:h-14 sm:w-14">
+                                <img src={image} alt={name} className="h-full w-full object-cover" loading="lazy" />
+                              </div>
+                            ) : (
+                              <span className="h-12 w-12 rounded-lg border border-current/20 bg-black/10 sm:h-14 sm:w-14" />
+                            )}
+                            <span className="truncate">{name}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => removeUnitFromRow(idx, name)}
+                              onMouseDown={(e) => e.stopPropagation()}
+                              className="rounded-full border border-red-400 bg-red-500/10 px-2 py-1 text-xs font-semibold text-red-300 transition hover:bg-red-500/20"
+                            >
+                              Remove
+                            </button>
+                          </div>
                         </div>
                       );
                     })}
