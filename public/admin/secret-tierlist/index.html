@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Tierlist (Static)</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#0b1020;color:#e6eef8;padding:20px}
+    .card{background:#0f1724;border:1px solid rgba(255,255,255,0.06);padding:16px;border-radius:12px;margin-bottom:12px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .units{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .unit{background:#061227;padding:8px;border:1px solid rgba(255,255,255,0.04);border-radius:8px;display:flex;gap:8px;align-items:center}
+    button{background:#1f2937;color:#fff;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
+    input, select{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#061227;color:#e6eef8}
+    .muted{color:#98a0b2;font-size:13px}
+  </style>
+</head>
+<body>
+  <h1>Admin: Tierlist Editor (static)</h1>
+  <p class="muted">This static editor runs entirely in your browser on GitHub Pages. Changes are not saved to the repo — use "Copy JSON" to export edits and open a PR.</p>
+  <div class="card">
+    <label>Select list: <select id="listSelect"></select></label>
+    <button id="copyJson">Copy Tierlist JSON</button>
+    <button id="reload">Reload Data</button>
+  </div>
+  <div id="lists"></div>
+  <script>
+    let tierlists = {};
+    let units = [];
+
+    async function load() {
+      try {
+        const t = await fetch('/admin/tierlists.json').then(r=>r.json());
+        const u = await fetch('/admin/units.json').then(r=>r.json());
+        tierlists = t || {};
+        units = u || [];
+      } catch(e) {
+        alert('Failed to load admin data');
+        return;
+      }
+      renderListSelect();
+      render();
+    }
+
+    function renderListSelect(){
+      const sel = document.getElementById('listSelect');
+      sel.innerHTML = '';
+      Object.keys(tierlists).forEach(k=>{
+        const opt = document.createElement('option'); opt.value = k; opt.textContent = k; sel.appendChild(opt);
+      });
+      // try to default to tanks
+      sel.value = sel.querySelector('option[value="TANKS_TIER_LIST"]') ? 'TANKS_TIER_LIST' : sel.value;
+      sel.onchange = render;
+    }
+
+    function render(){
+      const key = document.getElementById('listSelect').value;
+      const container = document.getElementById('lists');
+      container.innerHTML = '';
+      const rows = tierlists[key] || [];
+      rows.forEach((row, idx)=>{
+        const el = document.createElement('div'); el.className='card';
+        const header = document.createElement('div'); header.className='row';
+        const title = document.createElement('div'); title.innerHTML = '<strong>'+row.label+'</strong>' + (row.sublabel?(' – <span class="muted">'+row.sublabel+'</span>'):'');
+        const controls = document.createElement('div');
+        const addBtn = document.createElement('button'); addBtn.textContent='Add unit'; addBtn.onclick = ()=>openAdd(idx);
+        const removeAll = document.createElement('button'); removeAll.textContent='Remove all'; removeAll.style.background='#7f1d1d'; removeAll.onclick=()=>{row.units=[]; render();};
+        controls.appendChild(addBtn); controls.appendChild(removeAll);
+        header.appendChild(title); header.appendChild(controls);
+        el.appendChild(header);
+
+        const unitsWrap = document.createElement('div'); unitsWrap.className='units';
+        row.units.forEach(uName=>{
+          const u = document.createElement('div'); u.className='unit';
+          const name = document.createElement('div'); name.textContent = uName;
+          const rm = document.createElement('button'); rm.textContent='Remove'; rm.style.background='#7f1d1d'; rm.onclick = ()=>{ row.units = row.units.filter(x=>x!==uName); render(); };
+          u.appendChild(name); u.appendChild(rm); unitsWrap.appendChild(u);
+        });
+        el.appendChild(unitsWrap);
+        container.appendChild(el);
+      });
+    }
+
+    function openAdd(rowIdx){
+      const found = document.createElement('div'); found.className='card';
+      const input = document.createElement('input'); input.placeholder='Search units...'; input.style.width='60%';
+      const list = document.createElement('div'); list.style.marginTop='8px'; list.style.maxHeight='200px'; list.style.overflowY='auto';
+      found.appendChild(input); found.appendChild(list);
+      const container = document.getElementById('lists');
+      container.insertBefore(found, container.firstChild);
+      input.focus();
+      input.oninput = ()=>{
+        const q = input.value.toLowerCase().trim();
+        list.innerHTML='';
+        const available = units.filter(u=>u.toLowerCase().includes(q)).slice(0,50);
+        available.forEach(name=>{
+          const b = document.createElement('div'); b.className='row'; b.style.padding='6px 0';
+          b.innerHTML = '<div style="flex:1">'+name+'</div>';
+          const add = document.createElement('button'); add.textContent='Add'; add.onclick = ()=>{ const key = document.getElementById('listSelect').value; tierlists[key][rowIdx].units.push(name); render(); found.remove(); };
+          b.appendChild(add); list.appendChild(b);
+        });
+      };
+    }
+
+    document.getElementById('copyJson').onclick = ()=>{
+      const key = document.getElementById('listSelect').value;
+      const out = (tierlists[key]||[]).map(r=>({label:r.label,sublabel:r.sublabel,color:r.color,units:r.units}));
+      navigator.clipboard.writeText(JSON.stringify(out,null,2)).then(()=>alert('Copied!'));
+    };
+
+    document.getElementById('reload').onclick = load;
+
+    load();
+  </script>
+</body>
+</html>

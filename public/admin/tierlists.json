@@ -1,0 +1,369 @@
+{
+  "AUTO_TIER_CATEGORIES": {
+    "tanks": {
+      "metric": "health",
+      "sortDescending": true,
+      "rows": [
+        {
+          "label": "META",
+          "sublabel": "Top tanks by HP",
+          "color": "#e879f9",
+          "size": {
+            "count": 3
+          }
+        },
+        {
+          "label": "S",
+          "sublabel": "High HP tanks",
+          "color": "#ef4444",
+          "size": {
+            "percent": 18
+          }
+        },
+        {
+          "label": "A",
+          "sublabel": "Strong tanks",
+          "color": "#f97316",
+          "size": {
+            "percent": 22
+          }
+        },
+        {
+          "label": "B",
+          "sublabel": "Solid tanks",
+          "color": "#eab308",
+          "size": {
+            "percent": 28
+          }
+        },
+        {
+          "label": "C",
+          "sublabel": "Situational tanks",
+          "color": "#3b82f6",
+          "size": {
+            "percent": 32
+          }
+        }
+      ]
+    },
+    "damage": {
+      "metric": "damage",
+      "sortDescending": true,
+      "rows": [
+        {
+          "label": "META",
+          "sublabel": "Top damage dealers",
+          "color": "#e879f9",
+          "size": {
+            "count": 3
+          }
+        },
+        {
+          "label": "S",
+          "sublabel": "Excellent damage",
+          "color": "#ef4444",
+          "size": {
+            "percent": 20
+          }
+        },
+        {
+          "label": "A",
+          "sublabel": "High damage",
+          "color": "#f97316",
+          "size": {
+            "percent": 25
+          }
+        },
+        {
+          "label": "B",
+          "sublabel": "Good damage",
+          "color": "#eab308",
+          "size": {
+            "percent": 30
+          }
+        },
+        {
+          "label": "C",
+          "sublabel": "Moderate damage",
+          "color": "#3b82f6",
+          "size": {
+            "percent": 25
+          }
+        }
+      ]
+    }
+  },
+  "TANKS_TIER_LIST": [
+    {
+      "label": "META",
+      "sublabel": "Essential tanks (50k+ HP)",
+      "color": "#e879f9",
+      "units": [
+        "Katakoru",
+        "Jerin",
+        "Gyomain"
+      ]
+    },
+    {
+      "label": "S",
+      "sublabel": "Excellent tanks (14k-25k HP)",
+      "color": "#ef4444",
+      "units": [
+        "Wise",
+        "Megumo",
+        "Joti",
+        "Nonomi"
+      ]
+    },
+    {
+      "label": "A",
+      "sublabel": "Strong tanks (7k-10k HP)",
+      "color": "#f97316",
+      "units": [
+        "Brakura",
+        "Kenie",
+        "Yuwah",
+        "Fryren",
+        "Zinichou"
+      ]
+    },
+    {
+      "label": "B",
+      "sublabel": "Decent tanks (5k-6k HP)",
+      "color": "#eab308",
+      "units": [
+        "Brocolli",
+        "Orihemi",
+        "Truck",
+        "Grimmick",
+        "Hoshira"
+      ]
+    },
+    {
+      "label": "C",
+      "sublabel": "Situational (3k-4k HP)",
+      "color": "#3b82f6",
+      "units": [
+        "Acer",
+        "Kiwusuke",
+        "Rengundam"
+      ]
+    }
+  ],
+  "DAMAGE_DEALERS_TIER_LIST": [
+    {
+      "label": "META",
+      "sublabel": "Extreme damage (40k+)",
+      "color": "#e879f9",
+      "units": [
+        "Yujo Timeskip",
+        "Katakoru",
+        "Lilim"
+      ]
+    },
+    {
+      "label": "S",
+      "sublabel": "Exceptional damage (5k-17.5k)",
+      "color": "#ef4444",
+      "units": [
+        "Joozou",
+        "July",
+        "Megumo",
+        "Shimo Haya",
+        "Ulquiopta",
+        "Wise",
+        "Yuwah"
+      ]
+    },
+    {
+      "label": "A",
+      "sublabel": "High damage (1.25k-2.1k)",
+      "color": "#f97316",
+      "units": [
+        "Kenie",
+        "Kiwusuke",
+        "Brakura",
+        "Fryren",
+        "Joti",
+        "Yoriki",
+        "Zinichou"
+      ]
+    },
+    {
+      "label": "B",
+      "sublabel": "Good damage (300-1k)",
+      "color": "#eab308",
+      "units": [
+        "Kokushiro",
+        "Rengundam",
+        "Grimmick",
+        "Jerin",
+        "Brocolli",
+        "Erwon",
+        "Acer",
+        "Hoshira"
+      ]
+    },
+    {
+      "label": "C",
+      "sublabel": "Moderate damage (10-250)",
+      "color": "#3b82f6",
+      "units": [
+        "Truck",
+        "Saitomo",
+        "Coyote",
+        "Sakuna",
+        "Goji",
+        "Noruto",
+        "Picurro",
+        "Zero"
+      ]
+    }
+  ],
+  "SUPPORT_TIER_LIST": [
+    {
+      "label": "META",
+      "sublabel": "Essential support",
+      "color": "#e879f9",
+      "units": [
+        "Kiwusuke",
+        "Hakuro"
+      ]
+    },
+    {
+      "label": "S",
+      "sublabel": "Excellent support",
+      "color": "#ef4444",
+      "units": [
+        "Yuwi",
+        "Wise",
+        "Megumo",
+        "Orihemi"
+      ]
+    },
+    {
+      "label": "A",
+      "sublabel": "Strong support",
+      "color": "#f97316",
+      "units": [
+        "Erwon"
+      ]
+    }
+  ],
+  "QUALITY_TIER_LIST": [
+    {
+      "label": "META",
+      "color": "#ef4444",
+      "units": [
+        "Sakuna (Heian)",
+        "Goji Shinjuku",
+        "Ais",
+        "Aldedo",
+        "Kenie",
+        "Kiwusuke"
+      ]
+    },
+    {
+      "label": "S",
+      "color": "#fb7185",
+      "units": [
+        "Saitome (Serious)",
+        "Bloodtear",
+        "Shancks",
+        "Takamoso",
+        "Yoichi",
+        "Aisen (Divine)"
+      ]
+    },
+    {
+      "label": "A",
+      "color": "#fb923c",
+      "units": [
+        "Ulquiopta",
+        "Isoge (True Form)",
+        "Shimo Haya",
+        "Yutta",
+        "Entomancer",
+        "Yamumoto",
+        "Genes",
+        "Brakura",
+        "Yuwah",
+        "Duma",
+        "Bills"
+      ]
+    },
+    {
+      "label": "Progress",
+      "sublabel": "Solid while you build toward S / META",
+      "color": "#e5e7eb",
+      "units": [
+        "Joti",
+        "Michael",
+        "Brocolli",
+        "Deyo",
+        "Rengundam",
+        "Fryren",
+        "Akazo",
+        "Remura",
+        "Wise",
+        "Galactic Garo",
+        "Megumo",
+        "Golden Frozer",
+        "Orihemi",
+        "Goji",
+        "Sakuna",
+        "Erwon",
+        "Sukora"
+      ]
+    },
+    {
+      "label": "B",
+      "color": "#fde047",
+      "units": [
+        "Gyomain",
+        "Muscle",
+        "Jerin",
+        "Kokushiro",
+        "Hoshira",
+        "Yoriki",
+        "Acer",
+        "Coyote",
+        "Zinichou",
+        "Noruto",
+        "Nonomi",
+        "Grimmick",
+        "Saitomo",
+        "Truck",
+        "Tanjuro",
+        "Got"
+      ]
+    },
+    {
+      "label": "C",
+      "color": "#4ade80",
+      "units": [
+        "Picurro",
+        "Bon",
+        "Manji",
+        "Shinrat",
+        "Mobi",
+        "Goke",
+        "Itadoro"
+      ]
+    },
+    {
+      "label": "Trash",
+      "sublabel": "Bench these the moment you outgrow them",
+      "color": "#94a3b8",
+      "units": [
+        "Rinnju",
+        "Janwoo",
+        "Mika",
+        "Usoff",
+        "Zero",
+        "Keririn",
+        "Luppi"
+      ]
+    }
+  ]
+}
