@@ -11,9 +11,9 @@
   --surface-alt: #111822;
   --surface-soft: #141c2b;
   --surface-border: rgba(255, 255, 255, 0.08);
-  --text-default: #000000;
-  --text-muted: #4b5563;
-  --text-subtle: #6b7280;
+  --text-default: #eef0f6;
+  --text-muted: #9aa0b4;
+  --text-subtle: #7b88a4;
   --accent: #fb7185;
   --accent-strong: #f97316;
   --shadow-soft: 0 28px 80px -40px rgba(0, 0, 0, 0.64);
