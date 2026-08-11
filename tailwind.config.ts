@@ -17,9 +17,9 @@ const config: Config = {
           line: "#262b3a",
         },
         text: {
-          DEFAULT: "#eef0f6",
-          dim: "#9aa0b4",
-          faint: "#656b80",
+          DEFAULT: "#000000",
+          dim: "#4b5563",
+          faint: "#6b7280",
         },
         rarity: {
           common: "#34d399",

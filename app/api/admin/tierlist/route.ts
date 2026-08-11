@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import * as Tierlists from "/workspaces/Etherneum.github.io/data/tierlists";
+import * as Tierlists from '../../../../data/tierlists';
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   // Return the exported tierlists as JSON so the admin UI can edit/export them.

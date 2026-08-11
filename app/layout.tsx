@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import DiscordButton from "@/components/DiscordButton";
 import InteractiveBackground from "@/components/InteractiveBackground";
+import NoSSR from "@/components/NoSSR";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 const GA_MEASUREMENT_ID = "G-F7F0JKHSF4";
@@ -45,8 +46,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body suppressHydrationWarning className="min-h-screen font-body">
         <LanguageProvider>
-          <InteractiveBackground />
-          <NavBar />
+          <NoSSR>
+            <InteractiveBackground />
+          </NoSSR>
+          <NoSSR>
+            <NavBar />
+          </NoSSR>
           <main className="mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6">{children}</main>
           <footer className="mx-auto max-w-6xl border-t border-ink-line/70 px-4 py-8 text-text-faint sm:px-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -62,7 +67,9 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
-          <DiscordButton />
+          <NoSSR>
+            <DiscordButton />
+          </NoSSR>
         </LanguageProvider>
 
         {GA_MEASUREMENT_ID ? (

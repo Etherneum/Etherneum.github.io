@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import * as Values from "/workspaces/Etherneum.github.io/data/unitValues";
+import * as Values from '../../../../data/unitValues';
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   return NextResponse.json({
