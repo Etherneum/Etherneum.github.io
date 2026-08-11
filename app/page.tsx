@@ -64,13 +64,11 @@ const QUICK_LINKS = {
     { href: "/tierlist", label: "Tier List" },
     { href: "/cards", label: "Cards" },
     { href: "/tutorial", label: "Guide" },
-    { href: "/local", label: "Local Preview" },
   ],
   es: [
     { href: "/tierlist", label: "Lista de niveles" },
     { href: "/cards", label: "Cartas" },
     { href: "/tutorial", label: "Guía" },
-    { href: "/local", label: "Vista local" },
   ],
 };
 
@@ -78,8 +76,8 @@ const HERO_COPY = {
   en: {
     badge: "Meta update live",
     subtitle: "Tier lists, unit cards, and everything else you need in one place.",
-    featureTitle: "Quick paths",
-    featureDescription: "Get the best units, trade smarter, and follow the meta with clear, fast guides.",
+    featureTitle: "Why Etherneum stands out",
+    featureDescription: "A deliberate guide for serious players who want stronger builds, faster decisions, and a cleaner way to study the meta.",
     features: [
       {
         title: "Search every unit",
@@ -96,12 +94,19 @@ const HERO_COPY = {
     ],
     sectionTitle: "Meta spotlight",
     viewAll: "View all",
+    stats: [
+      { value: "98+", label: "Units cataloged" },
+      { value: "6", label: "Core guide routes" },
+      { value: "100%", label: "Meta-focused" },
+    ],
+    explorerTitle: "Explore the full guide",
+    explorerDescription: "Move from scouting the current meta to planning your next upgrade path without leaving the site.",
   },
   es: {
     badge: "Nuevas guías disponibles",
     subtitle: "Listas de nivel, cartas y todo lo que necesitas en un solo lugar.",
-    featureTitle: "Rutas rápidas",
-    featureDescription: "Consigue las mejores unidades, comercia con inteligencia y sigue el meta con guías claras y rápidas.",
+    featureTitle: "Por qué Etherneum destaca",
+    featureDescription: "Una guía pensada para jugadores serios que quieren mejores construcciones, decisiones más rápidas y una forma más clara de estudiar el meta.",
     features: [
       {
         title: "Busca todas las unidades",
@@ -118,6 +123,13 @@ const HERO_COPY = {
     ],
     sectionTitle: "Destacados del meta",
     viewAll: "Ver todo",
+    stats: [
+      { value: "98+", label: "Unidades catalogadas" },
+      { value: "6", label: "Rutas principales" },
+      { value: "100%", label: "Enfocado en el meta" },
+    ],
+    explorerTitle: "Explora la guía completa",
+    explorerDescription: "Pasa de estudiar el meta actual a planificar tu siguiente ruta de mejora sin salir del sitio.",
   },
 };
 
@@ -132,6 +144,7 @@ export default function HomePage() {
   const { language } = useLanguage();
   const copy = useMemo(() => HERO_COPY[language], [language]);
   const spotlight = useMemo(() => withCardImages(resolveSpotlightUnits()), []);
+  const statCards = useMemo(() => copy.stats.map((stat) => ({ ...stat })), [copy.stats]);
   const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
   const [glitchChars, setGlitchChars] = useState<string[]>(Array(SITE_TITLE.length).fill(""));
 
@@ -156,8 +169,8 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-20 sm:gap-24">
-      <section className="isolate -mx-4 flex min-h-[78vh] flex-col items-center justify-center overflow-hidden bg-transparent px-6 py-20 sm:-mx-6 sm:px-10 sm:py-24 lg:min-h-[84vh] lg:px-12 lg:py-32">
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-8 text-center lg:gap-10">
+      <section className="isolate -mx-4 flex min-h-[70vh] flex-col items-center justify-center overflow-hidden bg-transparent px-6 py-12 sm:-mx-6 sm:px-10 sm:py-16 lg:min-h-[76vh] lg:px-12 lg:py-20">
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-6 text-center lg:gap-8">
           <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)]">
             <span className="h-2 w-2 rounded-full bg-cyan-400" />
             {copy.badge}
@@ -188,7 +201,7 @@ export default function HomePage() {
           <p className="max-w-3xl px-4 font-body text-base leading-8 text-white/75 sm:text-lg lg:text-xl">
             {copy.subtitle}
           </p>
-          <div className="flex flex-wrap justify-center gap-3 pt-2">
+          <div className="flex flex-wrap justify-center gap-3 pt-1">
             {QUICK_LINKS[language].map((l, i) => (
               <Link
                 key={l.href}
@@ -200,6 +213,43 @@ export default function HomePage() {
                 }`}
               >
                 {l.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="grid w-full max-w-5xl gap-3 md:grid-cols-3">
+            {statCards.map((stat) => (
+              <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/8 px-5 py-4 text-center backdrop-blur-xl">
+                <p className="font-display text-3xl font-black tracking-[0.06em] text-white">{stat.value}</p>
+                <p className="mt-1 text-sm uppercase tracking-[0.3em] text-white/65">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="surface-card p-8 sm:p-10 lg:p-12">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-cyan-200/80">Guide overview</p>
+            <h2 className="mt-3 font-display text-3xl font-black tracking-[0.06em] text-text sm:text-[2rem]">
+              {copy.explorerTitle}
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-8 text-text-faint">
+              {copy.explorerDescription}
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              { href: "/tierlist", label: "Tier list", desc: "See the most reliable units and how the meta is shaping up." },
+              { href: "/cards", label: "Card library", desc: "Browse cards, browse details, and compare units quickly." },
+              { href: "/tutorial", label: "Strategic guide", desc: "Learn the systems that matter most in actual matches." },
+              { href: "/trades", label: "Trade planning", desc: "Evaluate value with a cleaner, more deliberate trading workflow." },
+            ].map((item) => (
+              <Link key={item.href} href={item.href} className="rounded-[1.3rem] border border-white/10 bg-gradient-to-br from-white/8 to-white/3 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/10">
+                <p className="font-display text-xl font-black tracking-[0.06em] text-text">{item.label}</p>
+                <p className="mt-2 text-sm leading-6 text-text-faint">{item.desc}</p>
               </Link>
             ))}
           </div>
@@ -239,8 +289,11 @@ export default function HomePage() {
       </section>
 
       <section>
-        <div className="mb-4 flex items-end justify-between">
-          <h2 className="font-display text-2xl font-black tracking-[0.06em] text-text">{copy.sectionTitle}</h2>
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-rose-200/80">Featured units</p>
+            <h2 className="mt-2 font-display text-2xl font-black tracking-[0.06em] text-text">{copy.sectionTitle}</h2>
+          </div>
           <Link href="/cards" className="font-body text-sm text-text-dim transition-colors hover:text-text">
             {copy.viewAll} &rarr;
           </Link>
